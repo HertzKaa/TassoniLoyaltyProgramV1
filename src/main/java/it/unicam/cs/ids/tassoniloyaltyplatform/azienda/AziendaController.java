@@ -1,9 +1,7 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,20 @@ public class AziendaController {
     @GetMapping
     public List<Azienda> getAziende(){
         return aziendaService.getAziende();
+    }
+    @PostMapping
+    public void aggiungiAzienda(@RequestBody Azienda azienda){
+        aziendaService.aggiungiAzienda(azienda);
+    }
+    @DeleteMapping(path= "{aziendaId}")
+    public void rimuoviAzienda(@PathVariable("aziendaId")Long aziendaId){
+        aziendaService.rimuoviAzienda(aziendaId);
+    }
+    public void updateAzienda(
+            @PathVariable("aziendaId") Long aziendaId,
+            @RequestParam(required = false) String nomeAzienda,
+            @RequestParam(required = false) String indirizzoAzienda,
+            @RequestParam(required = false) Long contattoAzienda){
+        aziendaService.updateAzienda(aziendaId,nomeAzienda,indirizzoAzienda,contattoAzienda);
     }
 }

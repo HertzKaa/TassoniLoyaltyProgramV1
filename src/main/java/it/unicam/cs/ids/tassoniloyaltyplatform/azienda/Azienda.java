@@ -7,6 +7,7 @@ public class Azienda {
     private String nomeAzienda;
     private Long contattoAzienda;
 
+    //per fare i programma fedelta dell'azienda e le transizioni si possono usare i
     /** costruttore con ID
      * @param indirizzoAzienda
      * @param aziendaId

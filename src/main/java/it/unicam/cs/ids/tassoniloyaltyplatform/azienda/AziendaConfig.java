@@ -9,12 +9,13 @@ public class AziendaConfig {
     CommandLineRunner commandLineRunner(
             AziendaRepository repository){
         return args -> {
-            new Azienda(
+            Azienda noemi =new Azienda(
                     "afaf",
                     "afasf",
                       9283128L
 
             );
+            repository.save(noemi);
         };
 
 
