@@ -4,6 +4,7 @@ import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,12 @@ public class ProgrammaFedeltaService {
     public List<ProgrammaFedelta> getProgrammiFedelta() {
         return programmaFedeltaRepository.findAll();
     }
-
+    @GetMapping
     public Optional<ProgrammaFedelta> getProgrammaByAziendaAndNome(Azienda azienda, String nome) {
         return programmaFedeltaRepository.findProgrammaFedeltaByAziendaAndNomeProgramma(azienda,nome);
+    }
+    @PostMapping
+    public void aggiungiProgrammaFedelta(ProgrammaFedelta programmaFedelta) {
+
     }
 }
