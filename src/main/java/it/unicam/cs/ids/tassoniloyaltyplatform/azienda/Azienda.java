@@ -27,6 +27,9 @@ public class Azienda {
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
     private String pIva;
 
+    /**
+     * questo frammento di codice definisce una relazione "uno a molti" tra un'azienda e i suoi programmi fedeltà associati.
+     */
     /* @JsonIgnore
     @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
@@ -42,12 +45,10 @@ public class Azienda {
     /**
      * Costruttore di default dell'azienda
      */
-    /* public Azienda() {
-        programmiFedelta = new ArrayList<>();
-        transazioni = new ArrayList<>();
+    public Azienda() {
+        //programmiFedelta = new ArrayList<>();
+        //transazioni = new ArrayList<>();
     }
-
-     */
 
     /**
      * @param aziendaId id dell'azienda
