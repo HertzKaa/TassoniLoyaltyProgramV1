@@ -1,45 +1,82 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+// import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
+// import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
+import jakarta.persistence.*;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@ToString
+@Entity(name = "Azienda")
+@Table(name = "azienda")
 public class Azienda {
-    //test
-    private String indirizzoAzienda;
+    @Id
+    @Column(name = "azienda_id", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long aziendaId;
-    private String nomeAzienda;
-    private Long contattoAzienda;
-    //TO DO-------------------------------------
-    //per fare i programma fedelta dell'azienda e le transizioni
-    // si possono usare delle liste che vengono updatatate tramite observer
 
-    /** costruttore con ID
-     * @param indirizzoAzienda
-     * @param aziendaId
-     * @param nomeAzienda
-     * @param contattoAzienda
+    @Column(name = "nome", nullable = false, columnDefinition = "TEXT")
+    private String nome;
+
+    @Column(name = "indirizzo", nullable = false, columnDefinition = "TEXT")
+    private String indirizzo;
+
+    @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
+    private String pIva;
+
+    /* @JsonIgnore
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<ProgrammaFedelta> programmiFedelta;
+    */
+
+    /* @JsonIgnore
+    @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Transazione> transazioni;
      */
-    public Azienda(String indirizzoAzienda, Long aziendaId, String nomeAzienda, Long contattoAzienda) {
-        this.indirizzoAzienda = indirizzoAzienda;
+
+    /**
+     * Costruttore di default dell'azienda
+     */
+    /* public Azienda() {
+        programmiFedelta = new ArrayList<>();
+        transazioni = new ArrayList<>();
+    }
+
+     */
+
+    /**
+     * @param aziendaId id dell'azienda
+     * @param nome      nome dell'azienda
+     * @param indirizzo indirizzo dell'azienda
+     * @param pIva      partita iva dell'azienda
+     */
+    public Azienda(Long aziendaId, String nome, String indirizzo, String pIva) {
         this.aziendaId = aziendaId;
-        this.nomeAzienda = nomeAzienda;
-        this.contattoAzienda = contattoAzienda;
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.pIva = pIva;
+        // this.programmiFedelta = new ArrayList<>();
+        // this.transazioni = new ArrayList<>();
     }
 
-    /** costruttore senza ID perchè già fornito da springboot
-     * @param indirizzoAzienda
-     * @param nomeAzienda
-     * @param contattoAzienda
+    /**
+     * Costruttore senza id, perchè esso viene generato automaticamente.
+     *
+     * @param nome      nome dell'azienda
+     * @param indirizzo indirizzo dell'azienda
+     * @param pIva      partita iva dell'azienda
      */
-    public Azienda(String indirizzoAzienda, String nomeAzienda, Long contattoAzienda) {
-        this.indirizzoAzienda = indirizzoAzienda;
-        this.nomeAzienda = nomeAzienda;
-        this.contattoAzienda = contattoAzienda;
-    }
-
-    public String getIndirizzoAzienda() {
-        return indirizzoAzienda;
-    }
-
-    public void setIndirizzoAzienda(String indirizzoAzienda) {
-        this.indirizzoAzienda = indirizzoAzienda;
+    public Azienda(String nome, String indirizzo, String pIva) {
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.pIva = pIva;
+        // this.programmiFedelta = new ArrayList<>();
+        // this.transazioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {
@@ -50,19 +87,45 @@ public class Azienda {
         this.aziendaId = aziendaId;
     }
 
-    public String getNomeAzienda() {
-        return nomeAzienda;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeAzienda(String nomeAzienda) {
-        this.nomeAzienda = nomeAzienda;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Long getContattoAzienda() {
-        return contattoAzienda;
+    public String getIndirizzo() {
+        return indirizzo;
     }
 
-    public void setContattoAzienda(Long contattoAzienda) {
-        this.contattoAzienda = contattoAzienda;
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
+
+    public String getpIva() {
+        return pIva;
+    }
+
+    public void setpIva(String pIva) {
+        this.pIva = pIva;
+    }
+
+    /* public List<ProgrammaFedelta> getProgrammiFedelta() {
+        return programmiFedelta;
+    }
+
+    public void setProgrammiFedelta(List<ProgrammaFedelta> programmiFedelta) {
+        this.programmiFedelta = programmiFedelta;
+    }
+
+    public List<Transazione> getTransazioni() {
+        return transazioni;
+    }
+
+    public void setTransazioni(List<Transazione> transazioni) {
+        this.transazioni = transazioni;
+    }
+
+     */
 }
