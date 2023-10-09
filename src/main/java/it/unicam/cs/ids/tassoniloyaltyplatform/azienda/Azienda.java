@@ -6,8 +6,10 @@ public class Azienda {
     private Long aziendaId;
     private String nomeAzienda;
     private Long contattoAzienda;
+    //TO DO-------------------------------------
+    //per fare i programma fedelta dell'azienda e le transizioni
+    // si possono usare delle liste che vengono updatatate tramite observer
 
-    //per fare i programma fedelta dell'azienda e le transizioni si possono usare i
     /** costruttore con ID
      * @param indirizzoAzienda
      * @param aziendaId
