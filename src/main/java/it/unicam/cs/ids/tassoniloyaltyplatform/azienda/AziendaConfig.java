@@ -12,7 +12,7 @@ public class AziendaConfig {
             Azienda noemi =new Azienda(
                     "afaf",
                     "afasf",
-                      9283128L
+                      "9283128L"
 
             );
             repository.save(noemi);

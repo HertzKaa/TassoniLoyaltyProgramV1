@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-//import it.unicam.cs.ids.loyaltyplatform.cliente.Cliente;
+import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
