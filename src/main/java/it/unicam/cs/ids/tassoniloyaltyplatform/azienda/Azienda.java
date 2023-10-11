@@ -128,5 +128,5 @@ public class Azienda {
         this.transazioni = transazioni;
     }
 
-     */ //
+     */
 }
