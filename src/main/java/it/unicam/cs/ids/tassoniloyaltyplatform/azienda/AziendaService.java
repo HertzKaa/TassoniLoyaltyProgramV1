@@ -28,7 +28,7 @@ private final AziendaRepository aziendaRepository;
 
     public void aggiungiAzienda(Azienda azienda) {
         Optional<Azienda> aziendaOptional= aziendaRepository
-                .findAziendaByNomeAzienda(azienda.getNomeAzienda());
+                .findAziendaByNomeAzienda(azienda.getNome());
         if(aziendaOptional.isPresent()){
                throw new IllegalStateException("azienda presente");
         }
