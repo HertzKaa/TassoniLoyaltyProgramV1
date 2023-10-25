@@ -13,4 +13,5 @@ public class Sottoscrizione {
     public Cliente getCliente() {
         return cliente;
     }
+
 }
