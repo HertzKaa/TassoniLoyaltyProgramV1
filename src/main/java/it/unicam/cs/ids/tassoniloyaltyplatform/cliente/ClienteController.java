@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "api/cliente")
 public class ClienteController {
@@ -13,4 +15,7 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    public Optional<Cliente> getClienteByNomeAndIndirizzo(String nome, String indirizzo){
+        return clienteService.getClienteByNomeAndIndirizzo(nome,indirizzo);
+    }
 }

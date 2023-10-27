@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface AziendaRepository
-        extends JpaRepository<Azienda,Long> {
+        extends JpaRepository<Azienda,String> {
  //    @Query("SELECT s FROM Azienda s WHERE s.nome=?1")
  //    giusto come esempio, da vedere
      Optional<Azienda> findAziendaByNomeAzienda(String nome);
