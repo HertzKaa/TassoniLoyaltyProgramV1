@@ -37,7 +37,7 @@ private final AziendaRepository aziendaRepository;
 
     public void rimuoviAzienda(Long aziendaId) {
         boolean exist= aziendaRepository.existsById(aziendaId);
-        if(!exist) {
+         if(!exist) {
             throw new IllegalStateException(
                     "azienda con id"+ aziendaId + "non esiste");
 
