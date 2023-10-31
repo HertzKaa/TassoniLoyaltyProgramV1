@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 //import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
 //import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
