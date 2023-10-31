@@ -15,11 +15,20 @@ public class Sottoscrizione {
     //private Cliente cliente;
     //private Azienda azienda;
 
+    /**   Costruttore senza Id
+     * @param cliente cliente che attua la sottoscrizione
+     * @param azienda azienda su cui il cliente è sottoscritto
+     */
     public Sottoscrizione(Cliente cliente, Azienda azienda) {
         this.cliente = cliente;
         this.azienda = azienda;
     }
 
+    /**  Costruttore con Id
+     * @param cliente cliente che attua la sottoscrizione
+     * @param azienda azienda su cui il cliente è sottoscritto
+     * @param id id della sottoscrizione
+     */
     public Sottoscrizione(Cliente cliente, Azienda azienda, Long id) {
         this.cliente = cliente;
         this.azienda = azienda;
