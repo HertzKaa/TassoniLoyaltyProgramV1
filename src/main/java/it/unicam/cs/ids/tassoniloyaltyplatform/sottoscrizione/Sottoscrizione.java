@@ -1,19 +1,25 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "Sottoscrizione")
+@Table(name = "Sottoscrizione")
 public class Sottoscrizione {
 
     @Id
     @GeneratedValue
     private Long id;
-    //private Cliente cliente;
-    //private Azienda azienda;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+    private Cliente cliente;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id")
+    private Azienda azienda;
 
     /**   Costruttore senza Id
      * @param cliente cliente che attua la sottoscrizione
