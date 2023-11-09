@@ -23,8 +23,7 @@ import java.util.Objects;
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
 
-@Getter
-@Setter
+
 @ToString
 @Entity(name = "Cliente")
 @Table(name = "cliente",
