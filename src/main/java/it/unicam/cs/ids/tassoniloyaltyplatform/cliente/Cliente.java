@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 //import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
 //import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.transazione.Transazione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +23,7 @@ import java.util.Objects;
  * Corrisponde anche all'omonima entità nel database del progetto.
  */
 
-@Getter
-@Setter
+
 @ToString
 @Entity(name = "Cliente")
 @Table(name = "cliente",
