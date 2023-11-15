@@ -62,7 +62,7 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         // this.programmiFedelta = new ArrayList<>();
-        // this.transazioni = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     /**
