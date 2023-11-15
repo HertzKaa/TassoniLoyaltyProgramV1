@@ -46,8 +46,8 @@ public class Azienda {
      * Costruttore di default dell'azienda
      */
     public Azienda() {
-        //programmiFedelta = new ArrayList<>();
-        //transazioni = new ArrayList<>();
+        programmiFedelta = new ArrayList<>();
+        transazioni = new ArrayList<>();
     }
 
     /**
