@@ -76,8 +76,8 @@ public class Azienda {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.pIva = pIva;
-        // this.programmiFedelta = new ArrayList<>();
-        // this.transazioni = new ArrayList<>();
+         this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {
