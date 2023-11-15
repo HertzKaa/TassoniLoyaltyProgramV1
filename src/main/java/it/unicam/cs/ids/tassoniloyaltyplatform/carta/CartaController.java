@@ -19,4 +19,5 @@ public class CartaController {
     public Optional<Carta> getCartaByCliente(Cliente cliente) {
         return cartaService.getCartaByCliente(cliente);
     }
+
 }
