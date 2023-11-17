@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-// import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
-// import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
+// import it.unicam.cs.ids.tassoniloyaltyplatform.convalida.Transazione;
+// import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.ToString;
 import lombok.Getter;
@@ -29,7 +29,7 @@ public class Azienda {
     private String indirizzo;
 
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
-    private String p_iva;
+    private String pIva;
 
     /**
      * questo frammento di codice definisce una relazione "uno a molti" tra un'azienda e i suoi programmi fedeltà associati.
@@ -58,15 +58,15 @@ public class Azienda {
      * @param aziendaId id dell'azienda
      * @param nome      nome dell'azienda
      * @param indirizzo indirizzo dell'azienda
-     * @param p_iva    partita iva dell'azienda
+     * @param pIva      partita iva dell'azienda
      */
-    public Azienda(Long aziendaId, String nome, String indirizzo, String p_iva) {
+    public Azienda(Long aziendaId, String nome, String indirizzo, String pIva) {
         this.aziendaId = aziendaId;
         this.nome = nome;
         this.indirizzo = indirizzo;
-        this.p_iva = p_iva;
-        // this.programmiFedelta = new ArrayList<>();
-        // this.transazioni = new ArrayList<>();
+        this.pIva = pIva;
+        //this.programmiFedelta = new ArrayList<>();
+        //this.transazioni = new ArrayList<>();
     }
 
     /**
@@ -79,9 +79,9 @@ public class Azienda {
     public Azienda(String nome, String indirizzo, String pIva) {
         this.nome = nome;
         this.indirizzo = indirizzo;
-        this.p_iva = pIva;
-        // this.programmiFedelta = new ArrayList<>();
-        // this.transazioni = new ArrayList<>();
+        this.pIva = pIva;
+        //this.programmiFedelta = new ArrayList<>();
+        //this.transazioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {
@@ -109,11 +109,11 @@ public class Azienda {
     }
 
     public String getpIva() {
-        return p_iva;
+        return pIva;
     }
 
     public void setpIva(String pIva) {
-        this.p_iva = pIva;
+        this.pIva = pIva;
     }
 
     /* public List<ProgrammaFedelta> getProgrammiFedelta() {

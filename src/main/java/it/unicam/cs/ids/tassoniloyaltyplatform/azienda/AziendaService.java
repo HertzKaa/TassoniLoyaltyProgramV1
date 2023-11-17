@@ -1,11 +1,12 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordAlreadyExistsException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,33 +23,56 @@ private final AziendaRepository aziendaRepository;
      * @return ritorna una lista presa dal database di Aziende
      */
     @GetMapping
-    public List<Azienda> getAziende(){
+    public Azienda findAziendaById(Long id) throws RecordNotFoundException{
+        Optional<Azienda> azienda = aziendaRepository.findById(id);
+        if(azienda.isPresent()) return azienda.get();
+        else throw new RecordNotFoundException();
+    }
+
+    @GetMapping
+    public List<Azienda> getAziende() {
         return aziendaRepository.findAll();
     }
 
-    public void aggiungiAzienda(Azienda azienda) {
-        Optional<Azienda> aziendaOptional= aziendaRepository
-                .findAziendaByNomeAzienda(azienda.getNome());
-        if(aziendaOptional.isPresent()){
-               throw new IllegalStateException("azienda presente");
+    @PostMapping
+    public void registraAzienda(Azienda newAzienda) throws RecordAlreadyExistsException {
+        Optional<Azienda> aziendaOptional = aziendaRepository
+                .findAziendaByP_iva(newAzienda.getpIva());
+        if(aziendaOptional.isPresent()) {
+            throw new RecordAlreadyExistsException();
         }
+        aziendaRepository.save(newAzienda);
+    }
+
+    /* public void aggiungiProgrammaAlCatalogo(Azienda azienda, ProgrammaFedelta programmaFedelta) {
+        azienda.getProgrammiFedelta().add(programmaFedelta);
         aziendaRepository.save(azienda);
-    }
-
-    public void rimuoviAzienda(Long aziendaId) {
-        boolean exist= aziendaRepository.existsById(aziendaId);
-         if(!exist) {
-            throw new IllegalStateException(
-                    "azienda con id"+ aziendaId + "non esiste");
-
-        }
-        aziendaRepository.deleteById(aziendaId);
-    }
+    } */
 
     @Transactional
-    public void updateAzienda(
-            Long aziendaId, String nomeAzienda, String indirizzoAzienda, Long contattoAzienda) {
+    public void modificaAzienda(Long id, String nome, String email) throws RecordAlreadyExistsException{
+        Azienda azienda = aziendaRepository.getReferenceById(id);
 
-       //TO DO
+        if (email != null && !email.isEmpty()) {
+            Optional<Azienda> aziendaOptional = aziendaRepository.findAziendaByP_iva(email);
+            if(aziendaOptional.isPresent()) {
+                throw new RecordAlreadyExistsException();
+            } else azienda.setpIva(email);
+        }
+
+        if (nome != null && !nome.isEmpty()) {
+            azienda.setNome(nome);
+        }
+
     }
+
+    @DeleteMapping
+    public void cancellaAzienda(Long id) throws RecordNotFoundException{
+        boolean exists = aziendaRepository.existsById(id);
+        if(!exists) {
+            throw new RecordNotFoundException();
+        }
+        aziendaRepository.deleteById(id);
+    }
+
 }

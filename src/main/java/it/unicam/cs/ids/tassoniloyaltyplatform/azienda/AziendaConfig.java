@@ -17,8 +17,5 @@ public class AziendaConfig {
             );
             repository.save(noemi);
         };
-
-
-
     }
 }
