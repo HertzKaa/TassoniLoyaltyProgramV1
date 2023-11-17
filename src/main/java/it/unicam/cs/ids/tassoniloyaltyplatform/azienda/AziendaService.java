@@ -50,7 +50,7 @@ private final AziendaRepository aziendaRepository;
     } */
 
     @Transactional
-    public void modificaAzienda(Long id, String nome, String pIva) throws RecordAlreadyExistsException{
+    public void modificaAzienda(Long id, String nome, String indirizzo, String pIva) throws RecordAlreadyExistsException{
         Azienda azienda = aziendaRepository.getReferenceById(id);
 
         if (pIva != null && !pIva.isEmpty()) {

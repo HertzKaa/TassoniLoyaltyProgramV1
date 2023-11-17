@@ -35,18 +35,19 @@ public class AziendaController {
         aziendaService.registraAzienda(azienda);
     }
 
-    @PutMapping(path = "{id_azienda}")
+    @PutMapping(path = "{azienda_id}")
     @ResponseStatus(value = HttpStatus.OK, reason = "Dati azienda modificati correttamente.")
     public void modificaAzienda(
-            @PathVariable("id_azienda") Long id,
+            @PathVariable("azienda_id") Long id,
             @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String indirizzo,
             @RequestParam(required = false) String pIva) throws Exception{
-        aziendaService.modificaAzienda(id, nome, pIva);
+        aziendaService.modificaAzienda(id, nome, indirizzo, pIva);
     }
 
-    @DeleteMapping(path = "{id_azienda}")
+    @DeleteMapping(path = "{azienda_id}")
     @ResponseStatus(value = HttpStatus.OK, reason = "Azienda eliminata.")
-    public void cancellaAzienda(@PathVariable("id_azienda") Long id) throws RecordNotFoundException {
+    public void cancellaAzienda(@PathVariable("azienda_id") Long id) throws RecordNotFoundException {
         aziendaService.cancellaAzienda(id);
     }
 
