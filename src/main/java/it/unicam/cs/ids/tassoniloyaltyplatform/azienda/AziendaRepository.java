@@ -10,5 +10,5 @@ public interface AziendaRepository extends JpaRepository<Azienda,Long> {
 
     Optional<Azienda> findAziendaByNome(String nome);
 
-    Optional<Azienda> findAziendaByP_iva(String p_iva);
+    Optional<Azienda> findAziendaBypIva(String p_iva);
 }

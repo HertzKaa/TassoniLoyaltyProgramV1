@@ -37,7 +37,7 @@ private final AziendaRepository aziendaRepository;
     @PostMapping
     public void registraAzienda(Azienda newAzienda) throws RecordAlreadyExistsException {
         Optional<Azienda> aziendaOptional = aziendaRepository
-                .findAziendaByP_iva(newAzienda.getpIva());
+                .findAziendaBypIva(newAzienda.getpIva());
         if(aziendaOptional.isPresent()) {
             throw new RecordAlreadyExistsException();
         }
@@ -50,14 +50,14 @@ private final AziendaRepository aziendaRepository;
     } */
 
     @Transactional
-    public void modificaAzienda(Long id, String nome, String email) throws RecordAlreadyExistsException{
+    public void modificaAzienda(Long id, String nome, String pIva) throws RecordAlreadyExistsException{
         Azienda azienda = aziendaRepository.getReferenceById(id);
 
-        if (email != null && !email.isEmpty()) {
-            Optional<Azienda> aziendaOptional = aziendaRepository.findAziendaByP_iva(email);
+        if (pIva != null && !pIva.isEmpty()) {
+            Optional<Azienda> aziendaOptional = aziendaRepository.findAziendaBypIva(pIva);
             if(aziendaOptional.isPresent()) {
                 throw new RecordAlreadyExistsException();
-            } else azienda.setpIva(email);
+            } else azienda.setpIva(pIva);
         }
 
         if (nome != null && !nome.isEmpty()) {

@@ -40,8 +40,8 @@ public class AziendaController {
     public void modificaAzienda(
             @PathVariable("id_azienda") Long id,
             @RequestParam(required = false) String nome,
-            @RequestParam(required = false) String email) throws Exception{
-        aziendaService.modificaAzienda(id, nome, email);
+            @RequestParam(required = false) String pIva) throws Exception{
+        aziendaService.modificaAzienda(id, nome, pIva);
     }
 
     @DeleteMapping(path = "{id_azienda}")
