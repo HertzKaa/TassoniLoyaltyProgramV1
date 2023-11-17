@@ -5,13 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // import it.unicam.cs.ids.loyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.ToString;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ToString
 @Entity(name = "Azienda")
-@Table(name = "azienda")
+@Table(name = "azienda",
+        uniqueConstraints = { @UniqueConstraint(name = "p_iva_unica", columnNames = "p_iva")
+        }
+)
 public class Azienda {
     @Id
     @Column(name = "azienda_id", nullable = false, updatable = false)
@@ -25,7 +29,7 @@ public class Azienda {
     private String indirizzo;
 
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
-    private String pIva;
+    private String p_iva;
 
     /**
      * questo frammento di codice definisce una relazione "uno a molti" tra un'azienda e i suoi programmi fedeltà associati.
@@ -54,13 +58,13 @@ public class Azienda {
      * @param aziendaId id dell'azienda
      * @param nome      nome dell'azienda
      * @param indirizzo indirizzo dell'azienda
-     * @param pIva      partita iva dell'azienda
+     * @param p_iva    partita iva dell'azienda
      */
-    public Azienda(Long aziendaId, String nome, String indirizzo, String pIva) {
+    public Azienda(Long aziendaId, String nome, String indirizzo, String p_iva) {
         this.aziendaId = aziendaId;
         this.nome = nome;
         this.indirizzo = indirizzo;
-        this.pIva = pIva;
+        this.p_iva = p_iva;
         // this.programmiFedelta = new ArrayList<>();
         // this.transazioni = new ArrayList<>();
     }
@@ -75,7 +79,7 @@ public class Azienda {
     public Azienda(String nome, String indirizzo, String pIva) {
         this.nome = nome;
         this.indirizzo = indirizzo;
-        this.pIva = pIva;
+        this.p_iva = pIva;
         // this.programmiFedelta = new ArrayList<>();
         // this.transazioni = new ArrayList<>();
     }
@@ -105,11 +109,11 @@ public class Azienda {
     }
 
     public String getpIva() {
-        return pIva;
+        return p_iva;
     }
 
     public void setpIva(String pIva) {
-        this.pIva = pIva;
+        this.p_iva = pIva;
     }
 
     /* public List<ProgrammaFedelta> getProgrammiFedelta() {
