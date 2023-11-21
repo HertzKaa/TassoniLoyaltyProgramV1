@@ -19,4 +19,5 @@ public class ClienteController {
     public Optional<Cliente> getClienteByNomeAndIndirizzo(String nome, String indirizzo){
         return clienteService.getClienteByNomeAndIndirizzo(nome,indirizzo);
     }
+
 }
