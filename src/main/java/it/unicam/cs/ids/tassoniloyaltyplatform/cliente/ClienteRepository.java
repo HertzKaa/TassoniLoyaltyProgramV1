@@ -18,4 +18,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long>{
     Boolean existsByEmail(String email);
 
     Optional<Cliente> findClienteByNomeAndIndirizzo(String nome, String indirizzo);
+
+    Optional<Cliente> findClienteByNumCellulare(String numCellulare);
 }
