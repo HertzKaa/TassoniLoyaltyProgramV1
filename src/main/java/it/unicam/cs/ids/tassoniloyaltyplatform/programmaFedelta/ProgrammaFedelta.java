@@ -1,72 +1,70 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
-import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
-import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
+//import it.unicam.cs.ids.tassoniloyaltyplatform.iscrizione.Iscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@ToString
+@Getter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_programma")
+@Entity(name = "ProgrammaFedelta")
 @Table(name = "programma_fedelta")
-@Entity(name = "programma_fedelta")
-public class ProgrammaFedelta {
+public abstract class ProgrammaFedelta {
+
     @Id
-    @Column(name="programma_fedelta_id", nullable=false, updatable= false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long programmaFedeltaId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id_programma"
+    )
+    private Long programmaId;
 
-    private int tipo;//Non so se serve
+    @ManyToOne
+    @JoinColumn(
+            name = "id_azienda",
+            referencedColumnName = "id_azienda",
+            updatable = false
+    )
+    private Azienda azienda;
 
-    @Column(name= "nome", nullable = false, columnDefinition = "TEXT")
-    private String nomeProgramma;
+    @JsonIgnore
+    @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL)
+    private List<Iscrizione> iscrizioni;
 
-    //private Azienda azienda;
+    @Column(
+            name = "nome",
+            nullable = false,
+            columnDefinition = "VARCHAR(40)"
+    )
+    private String nome;
 
-    @Column(name= "numero_clienti", nullable = false, columnDefinition = "NUM")
-    private int numClienti;
 
-    //private List<Sottoscrizione> sottoscrizioni;
-
-    public ProgrammaFedelta(Long programmaFedeltaId, int tipo, String nomeProgramma, Azienda azienda, int numClienti, List<Sottoscrizione> sottoscrizioni) {
-        this.programmaFedeltaId = programmaFedeltaId;
-        this.tipo = tipo;
-        this.nomeProgramma = nomeProgramma;
-        //this.azienda = azienda;
-        this.numClienti = numClienti;
-        sottoscrizioni= new ArrayList<>();
-    }
-
-    public ProgrammaFedelta(int tipo, String nomeProgramma, Azienda azienda, int numClienti) {
-        this.tipo = tipo;
-        this.nomeProgramma = nomeProgramma;
-        //this.azienda = azienda;
-        this.numClienti = numClienti;
-        //sottoscrizioni= new ArrayList<>();
-    }
-
+    /**
+     * Costruttore di default
+     */
     public ProgrammaFedelta() {
-
+        iscrizioni = new ArrayList<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    /**
+     * Costruttore senza id, il quale verrà generato dal DB
+     *
+     * @param azienda
+     * @param nome
+     */
+    public ProgrammaFedelta(Azienda azienda, String nome) {
 
-        ProgrammaFedelta that = (ProgrammaFedelta) o;
-
-        // Verifica che i programmi abbiano lo stesso AziendaId
-        return programmaFedeltaId != null ? programmaFedeltaId.equals(that.programmaFedeltaId) : that.programmaFedeltaId == null;
+        iscrizioni = new ArrayList<>();
+        this.azienda = azienda;
+        this.nome = nome;
     }
-    @Override
-    public int hashCode() {
-        return Objects.hash(programmaFedeltaId);
 
+    public void setNome(String nome) {
+        this.nome = nome;
     }
+
 }

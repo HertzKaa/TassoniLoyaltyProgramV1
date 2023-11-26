@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.cliente;
+package it.unicam.cs.ids.tassoniloyaltyplatform.cliente; //Stas
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;

@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
+package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.ClienteService;

@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
+package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,21 +1,22 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
+package it.unicam.cs.ids.tassoniloyaltyplatform.azienda; //Stas
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-// import it.unicam.cs.ids.tassoniloyaltyplatform.convalida.Transazione;
-// import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
+import it.unicam.cs.ids.tassoniloyaltyplatform.transazione.Transazione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.ToString;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe che rappresenta un'azienda nel sistema.
+ * Corrisponde anche all'omonima entità nel database del progetto.
+ */
+
 @ToString
 @Entity(name = "Azienda")
-@Table(name = "azienda",
-        uniqueConstraints = { @UniqueConstraint(name = "p_iva_unica", columnNames = "p_iva")
-        }
-)
+@Table(name = "azienda")
 public class Azienda {
     @Id
     @Column(name = "azienda_id", nullable = false, updatable = false)
@@ -31,27 +32,22 @@ public class Azienda {
     @Column(name = "p_iva", nullable = false, columnDefinition = "TEXT")
     private String pIva;
 
-    /**
-     * questo frammento di codice definisce una relazione "uno a molti" tra un'azienda e i suoi programmi fedeltà associati.
-     */
-    /* @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<ProgrammaFedelta> programmiFedelta;
-    */
 
-    /* @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Transazione> transazioni;
-     */
 
     /**
      * Costruttore di default dell'azienda
      */
     public Azienda() {
-        //programmiFedelta = new ArrayList<>();
-        //transazioni = new ArrayList<>();
+        programmiFedelta = new ArrayList<>();
+        transazioni = new ArrayList<>();
     }
 
     /**
@@ -65,8 +61,8 @@ public class Azienda {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.pIva = pIva;
-        //this.programmiFedelta = new ArrayList<>();
-        //this.transazioni = new ArrayList<>();
+        this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     /**
@@ -80,8 +76,8 @@ public class Azienda {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.pIva = pIva;
-        //this.programmiFedelta = new ArrayList<>();
-        //this.transazioni = new ArrayList<>();
+        this.programmiFedelta = new ArrayList<>();
+        this.transazioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {
@@ -116,7 +112,7 @@ public class Azienda {
         this.pIva = pIva;
     }
 
-    /* public List<ProgrammaFedelta> getProgrammiFedelta() {
+    public List<ProgrammaFedelta> getProgrammiFedelta() {
         return programmiFedelta;
     }
 
@@ -131,6 +127,4 @@ public class Azienda {
     public void setTransazioni(List<Transazione> transazioni) {
         this.transazioni = transazioni;
     }
-
-     */
 }

@@ -1,76 +1,105 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
+package it.unicam.cs.ids.tassoniloyaltyplatform.azienda; //Stas
 
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+//import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class AziendaService {
-private final AziendaRepository aziendaRepository;
+    private final AziendaRepository aziendaRepository;
+
     @Autowired
     public AziendaService(AziendaRepository aziendaRepository) {
         this.aziendaRepository = aziendaRepository;
     }
 
     /**
+     * Restituisce tutte le aziende presenti nel database
      *
-     * @return ritorna una lista presa dal database di Aziende
+     * @return una List<Azienda> contenente tutte le aziende presenti nel database
      */
-    @GetMapping
-    public Azienda findAziendaById(Long id) throws RecordNotFoundException{
-        Optional<Azienda> azienda = aziendaRepository.findById(id);
-        if(azienda.isPresent()) return azienda.get();
-        else throw new RecordNotFoundException();
-    }
-
-    @GetMapping
     public List<Azienda> getAziende() {
         return aziendaRepository.findAll();
     }
 
-    @PostMapping
-    public void registraAzienda(Azienda newAzienda) throws RecordAlreadyExistsException {
-        Optional<Azienda> aziendaOptional = aziendaRepository
-                .findAziendaBypIva(newAzienda.getpIva());
-        if(aziendaOptional.isPresent()) {
-            throw new RecordAlreadyExistsException();
-        }
-        aziendaRepository.save(newAzienda);
-    }
+    /**
+     * Aggiunge una nuova azienda al database
+     *
+     * @param azienda azienda che si vuole aggiungere nel database
+     */
+    public Azienda addNewAzienda(Azienda azienda) throws ResourceAlreadyExistsException {
+        Optional<Azienda> aziendaOptional = aziendaRepository.findByNomeAndIndirizzo(azienda.getNome(), azienda.getIndirizzo());
 
-    /* public void aggiungiProgrammaAlCatalogo(Azienda azienda, ProgrammaFedelta programmaFedelta) {
-        azienda.getProgrammiFedelta().add(programmaFedelta);
-        aziendaRepository.save(azienda);
-    } */
+        if (aziendaOptional.isPresent()) {
+            throw new ResourceAlreadyExistsException();
+        }
+        return aziendaRepository.save(azienda);
+    }
 
     @Transactional
-    public void modificaAzienda(Long id, String nome, String indirizzo, String pIva) throws RecordAlreadyExistsException{
-        Azienda azienda = aziendaRepository.getReferenceById(id);
-
-        if (pIva != null && !pIva.isEmpty()) {
-            Optional<Azienda> aziendaOptional = aziendaRepository.findAziendaBypIva(pIva);
-            if(aziendaOptional.isPresent()) {
-                throw new RecordAlreadyExistsException();
-            } else azienda.setpIva(pIva);
+    public void addProgrammaToAzienda(Long aziendaId, programmaFedelta ProgrammaFedelta) throws ResourceNotFoundException {
+        Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);
+        if (aziendaOptional.isEmpty()) {
+            throw new ResourceNotFoundException();
         }
 
-        if (nome != null && !nome.isEmpty()) {
-            azienda.setNome(nome);
+        boolean exists = aziendaOptional.get().getProgrammiFedelta().stream()
+                .anyMatch(pf -> pf.getNomeProgramma().equals(programmaFedelta.getNomeProgramma()));
+        if (exists) {
+            throw new ResourceAlreadyExistsException("Un programma fedeltà con il nome" +
+                    programmaFedelta.getNomeProgramma() + " appartiene già all'azienda");
         }
 
+        if (!Objects.equals(programmaFedelta.getAzienda().getAziendaId(), aziendaId)) {
+            throw new IllegalArgumentException("Il programma fedeltà non appartiene a questa azienda, ma a " +
+                    programmaFedelta.getAzienda().toString());
+        }
+
+        //questa riga serve, altrimenti transactional non funziona
+        Azienda azienda = aziendaOptional.get();
+        azienda.getProgrammiFedelta().add(ProgrammaFedelta);
     }
 
-    @DeleteMapping
-    public void cancellaAzienda(Long id) throws RecordNotFoundException{
-        boolean exists = aziendaRepository.existsById(id);
-        if(!exists) {
-            throw new RecordNotFoundException();
+    /**
+     * Elimina un'azienda con lo specifico aziendaId dal database
+     *
+     * @param aziendaId id dell'azienda che si vuole eliminare dal database
+     */
+    public void deleteAzienda(Long aziendaId) throws ResourceNotFoundException {
+        boolean exists = aziendaRepository.existsById(aziendaId);
+
+        if (!exists) {
+            throw new ResourceNotFoundException();
+        } else {
+            aziendaRepository.deleteById(aziendaId);
         }
-        aziendaRepository.deleteById(id);
     }
 
+    public Optional<Azienda> getAziendaById(long aziendaId) {
+        return aziendaRepository.findById(aziendaId);
+    }
+
+    private Azienda retrieveAzienda(Long aziendaId) throws ResourceNotFoundException {
+        Optional<Azienda> aziendaOptional = aziendaRepository.findById(aziendaId);
+        if (aziendaOptional.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        return aziendaOptional.get();
+    }
+
+    /* public List<ProgrammaFedelta> getProgrammiAzienda(Long aziendaId) {
+        Azienda azienda = retrieveAzienda(aziendaId);
+        return azienda.getProgrammiFedelta();
+    } */
+
+    public void deleteAllAziende(){
+        aziendaRepository.deleteAll();
+    }
 }

@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.cliente;
+package it.unicam.cs.ids.tassoniloyaltyplatform.cliente; //Stas
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
+package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 
 //import it.unicam.cs.ids.tassoniloyaltyplatform.dto.CartaDto;
 import org.springframework.http.HttpStatus;

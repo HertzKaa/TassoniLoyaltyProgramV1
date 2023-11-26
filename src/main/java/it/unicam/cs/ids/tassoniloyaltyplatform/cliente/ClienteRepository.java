@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.cliente;
+package it.unicam.cs.ids.tassoniloyaltyplatform.cliente; //Stas
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;

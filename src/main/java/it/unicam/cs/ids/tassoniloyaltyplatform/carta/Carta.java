@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
+package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
