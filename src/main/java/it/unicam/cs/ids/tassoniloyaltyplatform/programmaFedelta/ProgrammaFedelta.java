@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta;
+package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta; //Mike
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
