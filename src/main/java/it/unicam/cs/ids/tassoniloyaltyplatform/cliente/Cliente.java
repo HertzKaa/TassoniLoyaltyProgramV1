@@ -3,10 +3,8 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.cliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
-//import it.unicam.cs.ids.loyaltyplatform.convalida.Transazione;
-//import it.unicam.cs.ids.loyaltyplatform.sottoscrizione.Sottoscrizione;
-import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import it.unicam.cs.ids.tassoniloyaltyplatform.transazione.Transazione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -147,4 +145,3 @@ public class Cliente {
         return getClass().hashCode();
     }
 }
-

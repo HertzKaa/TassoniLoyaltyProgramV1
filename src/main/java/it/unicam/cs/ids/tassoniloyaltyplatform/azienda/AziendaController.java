@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
-import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordAlreadyExistsException;
-import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordNotFoundException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

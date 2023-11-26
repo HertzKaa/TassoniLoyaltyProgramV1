@@ -1,7 +1,5 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
-import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordAlreadyExistsException;
-import it.unicam.cs.ids.tassoniloyaltyplatform.exception.RecordNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

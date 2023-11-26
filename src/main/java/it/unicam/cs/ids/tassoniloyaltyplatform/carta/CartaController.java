@@ -1,23 +1,29 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.carta;
 
-import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import it.unicam.cs.ids.tassoniloyaltyplatform.dto.CartaDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/carta")
+@RequestMapping(path = "api/carte")
 public class CartaController {
     private final CartaService cartaService;
 
     public CartaController(CartaService cartaService) {
         this.cartaService = cartaService;
     }
+
     @GetMapping
-    public Optional<Carta> getCartaByCliente(Cliente cliente) {
-        return cartaService.getCartaByCliente(cliente);
+    public List<Carta> getAllCarte() {
+        return cartaService.getCarte();
     }
 
+   /* @PostMapping
+    public ResponseEntity<Carta> registraNuovaCarta(@RequestBody CartaDto dto) {
+        Carta newCarta = cartaService.addNewCarta(dto.getClienteId());
+        return new ResponseEntity<>(newCarta, HttpStatus.CREATED);
+    } */
 }
