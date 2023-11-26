@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.cliente; //Stas
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class ClienteController {
     }
 
     @GetMapping(path = "/sottoscrizioni/{clienteId}")
-    public List<Sottoscrizione> getSottoscrizioniCliente(@PathVariable("clienteId") Long clienteId) {
+    public List<Sottoscrizione> getSottoscrizioniCliente(@PathVariable("clienteId") Long clienteId) throws ResourceNotFoundException {
         return clienteService.getSottoscrizioniCliente(clienteId);
     }
 
@@ -55,12 +56,8 @@ public class ClienteController {
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> registraNuovoCliente(@RequestBody Cliente cliente) {
-        try {
-            Cliente newCliente = clienteService.addNewCliente(cliente);
-            return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
-        } catch (ResourceAlreadyExistsException e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
+        Cliente newCliente = clienteService.addNewCliente(cliente);
+        return new ResponseEntity<>(newCliente, HttpStatus.CREATED);
     }
 
     /**
@@ -69,7 +66,7 @@ public class ClienteController {
      * @param clienteId l'id del cliente che si desidera eliminare
      */
     @DeleteMapping(path = "{clienteId}")
-    public void deleteCliente(@PathVariable("clienteId") Long clienteId) {
+    public void deleteCliente(@PathVariable("clienteId") Long clienteId) throws ResourceNotFoundException {
         clienteService.deleteCliente(clienteId);
     }
 
@@ -80,7 +77,7 @@ public class ClienteController {
      * @param email     la nuova email da inserire
      */
     @PutMapping(path = "{clienteId}")
-    public void updateClienteEmail(@PathVariable("clienteId") Long clienteId, String email) {
+    public void updateClienteEmail(@PathVariable("clienteId") Long clienteId, String email) throws ResourceNotFoundException {
         clienteService.updateClienteEmail(clienteId, email);
     }
 }

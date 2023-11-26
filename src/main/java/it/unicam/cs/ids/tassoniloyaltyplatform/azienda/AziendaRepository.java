@@ -16,5 +16,6 @@ public interface AziendaRepository extends JpaRepository<Azienda, Long> {
      * @param indirizzo indirizzo dell'azienda che si desidera cercare
      * @return una Optional<Azienda> corrispondente all'azienda con il desiderato nome e indirizzo
      */
-    Optional<Azienda> findByNomeAndIndirizzo(String nome, String indirizzo);
+    Optional<Azienda> findAziendaByNome(String nome);
+    Optional<Azienda> findAziendaByIndirizzo(String indirizzo);
 }

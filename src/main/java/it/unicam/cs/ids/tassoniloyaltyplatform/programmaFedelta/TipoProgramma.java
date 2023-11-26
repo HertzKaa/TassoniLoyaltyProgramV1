@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta;
 
-public enum TipoProgrammaFedelta {
+public enum TipoProgramma {
     punti,
     livelli,
     coalizioni,

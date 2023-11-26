@@ -38,7 +38,7 @@ public class CartaService {
     private Carta getCartaById(Long cartaId) throws ResourceNotFoundException{
         Optional<Carta> optionalCarta = cartaRepository.findById(cartaId);
         if(optionalCarta.isEmpty()){
-            throw new ResourceNotFoundException("Carta con id " + cartaId + " non trovata!");
+            throw new ResourceNotFoundException();
         }else {
             return optionalCarta.get();
         }
@@ -46,10 +46,10 @@ public class CartaService {
 
 
 
-    private Cliente getClienteById(Long clienteId) {
+    private Cliente getClienteById(Long clienteId) throws ResourceNotFoundException {
         Optional<Cliente>  optionalCliente = clienteService.getClienteById(clienteId);
         if(optionalCliente.isEmpty()){
-            throw  new ResourceNotFoundException("Cliente con id " + clienteId + " non esiste!");
+            throw  new ResourceNotFoundException();
         } else {
             return optionalCliente.get();
         }

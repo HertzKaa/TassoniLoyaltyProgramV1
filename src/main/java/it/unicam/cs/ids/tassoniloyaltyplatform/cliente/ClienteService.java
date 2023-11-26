@@ -60,11 +60,11 @@ public class ClienteService {
      *
      * @param clienteId id del cliente che si vuole eliminare
      */
-    public void deleteCliente(Long clienteId) {
+    public void deleteCliente(Long clienteId) throws ResourceNotFoundException {
         boolean exists = clienteRepository.existsById(clienteId);
 
         if (!exists) {
-            throw new ResourceNotFoundException("cliente con id " + clienteId + " non esiste!");
+            throw new ResourceNotFoundException();
         }
         clienteRepository.deleteById(clienteId);
     }
@@ -76,9 +76,9 @@ public class ClienteService {
      * @param email     nuova email da impostare al cliente
      */
     @Transactional
-    public void updateClienteEmail(Long clienteId, String email) {
+    public void updateClienteEmail(Long clienteId, String email) throws ResourceNotFoundException {
         Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new ResourceNotFoundException("cliente con id " + clienteId + " non esiste!"));
+                .orElseThrow(() -> new ResourceNotFoundException());
 
         if (email != null && email.length() > 0 &&
                 !Objects.equals(cliente.getEmail(), email)) {
@@ -107,17 +107,16 @@ public class ClienteService {
      * @param newSub
      */
     public void aggiungiNuovaSottoscrizione(Cliente cliente, Sottoscrizione newSub)
-            throws IllegalStateException {
+            throws IllegalStateException, ResourceNotFoundException, ResourceAlreadyExistsException {
         Optional<Cliente> clienteOptional = clienteRepository.findById(cliente.getClienteId());
         if (clienteOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Cliente con l'id " + cliente.getClienteId() + " non trovato!");
+            throw new ResourceNotFoundException();
         }
 
         boolean exists = clienteOptional.get().getSottoscrizioni().stream()
                 .anyMatch(pf -> pf.getProgramma().equals(newSub.getProgramma()));
         if (exists) {
-            throw new ResourceAlreadyExistsException("Una sottoscrizione del programma fedeltà" +
-                    newSub.getProgramma() + " appartiene già al cliente");
+            throw new ResourceAlreadyExistsException();
         }
 
         if (!Objects.equals(newSub.getCliente().getClienteId(), clienteOptional.get().getClienteId())) {
@@ -126,15 +125,15 @@ public class ClienteService {
         }
     }
 
-    private Cliente retrieveCliente(Long clienteId) {
+    private Cliente retrieveCliente(Long clienteId) throws ResourceNotFoundException {
         Optional<Cliente> clienteOptional = clienteRepository.findById(clienteId);
         if (clienteOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Cliente con l'id " + clienteId + " non trovato!");
+            throw new ResourceNotFoundException();
         }
         return clienteOptional.get();
     }
 
-    public List<Sottoscrizione> getSottoscrizioniCliente(Long clienteId) {
+    public List<Sottoscrizione> getSottoscrizioniCliente(Long clienteId) throws ResourceNotFoundException {
         Cliente cliente = retrieveCliente(clienteId);
 
         return cliente.getSottoscrizioni();

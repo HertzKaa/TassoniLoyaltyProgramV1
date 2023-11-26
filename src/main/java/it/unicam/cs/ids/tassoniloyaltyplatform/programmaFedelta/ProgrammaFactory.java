@@ -7,12 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProgrammaFactory {
-
-    @Autowired
     public ProgrammaFactory() {
     }
     public ProgrammaFedelta crea(Azienda azienda, ProgrammaFedeltaDTO dto) {
-        if (dto.getTipo() == TipoProgrammaFedelta.livelli) {
+        if (dto.getTipo() == TipoProgramma.livelli) {
             return new ProgrammaLivelli(azienda, dto.getNome());
         } else return null;
     }

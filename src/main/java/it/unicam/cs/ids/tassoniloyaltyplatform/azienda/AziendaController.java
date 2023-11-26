@@ -1,64 +1,53 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.azienda; //Stas
+package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
 
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
-import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Classe controller, che gestisce le chiamate CRUD dell'entità azienda
- */
 @RestController
-@RequestMapping(path = "/api/aziende")
+@RequestMapping(path = "api/azienda")
 public class AziendaController {
-    public final AziendaService aziendaService;
+
+    private final AziendaService aziendaService;
 
     @Autowired
     public AziendaController(AziendaService aziendaService) {
         this.aziendaService = aziendaService;
     }
 
-    /**
-     * Esegue una chiamata GET che restituisce una lista con tutte le aziende
-     *
-     * @return una List<Aziende> che contiene tutte le aziende del database
-     */
     @GetMapping
-    public List<Azienda> getAziende() {
+    public List<Azienda> getAllAziende() {
         return aziendaService.getAziende();
     }
 
-    @GetMapping(path = "/programmi/{aziendaId}")
-    public List<ProgrammaFedelta> getProgrammiAzienda(@PathVariable("aziendaId") Long aziendaId) {
-        return aziendaService.getProgrammiAzienda(aziendaId);
+    @GetMapping(path = "/{aziendaId}")
+    public Azienda findAziendaById(@PathVariable("aziendaId") Long id) throws ResourceNotFoundException{
+        return aziendaService.findAziendaById(id);
     }
 
-    /**
-     * Esegue una chiamata POST che inserisce una azienda nel database
-     *
-     * @param azienda da inserire nel databse
-     */
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> registraNuovaAzienda(@RequestBody Azienda azienda) {
-        try {
-            Azienda newAzienda = aziendaService.addNewAzienda(azienda);
-            return new ResponseEntity<>(newAzienda, HttpStatus.CREATED);
-        } catch (ResourceAlreadyExistsException e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
+    @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED, reason = "Nuova azienda registrata correttamente.")
+    public void registraAzienda(@RequestBody Azienda azienda) throws ResourceAlreadyExistsException {
+        aziendaService.registraAzienda(azienda);
     }
 
-    /**
-     * Esegue una chiamata DELETE che elimina un'azienda con lo specifico id dal database
-     *
-     * @param aziendaId l'id dell'azienda che si desidera eliminare
-     */
-    @DeleteMapping(path = "{aziendaId}")
-    public void deleteAzienda(@PathVariable("aziendaId") Long aziendaId) {
-        aziendaService.deleteAzienda(aziendaId);
+    @PutMapping(path = "{id_azienda}")
+    @ResponseStatus(value = HttpStatus.OK, reason = "Dati azienda modificati correttamente.")
+    public void modificaAzienda(
+            @PathVariable("id_azienda") Long id,
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String indirizzo) throws Exception{
+        aziendaService.modificaAzienda(id, nome, indirizzo);
     }
+
+    @DeleteMapping(path = "{id_azienda}")
+    @ResponseStatus(value = HttpStatus.OK, reason = "Azienda eliminata.")
+    public void cancellaAzienda(@PathVariable("id_azienda") Long id) throws ResourceNotFoundException {
+        aziendaService.cancellaAzienda(id);
+    }
+
 }
