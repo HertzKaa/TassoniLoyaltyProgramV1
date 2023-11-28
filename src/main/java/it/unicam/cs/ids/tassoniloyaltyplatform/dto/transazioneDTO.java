@@ -3,12 +3,11 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
-public class accreditoDTO {
+public class transazioneDTO {
 
-    private Long tesseraId;
+    private Long cartaId;
     private Long aziendaId;
     private double sommaAcquisto;
 
