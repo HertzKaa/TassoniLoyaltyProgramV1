@@ -9,9 +9,7 @@ import lombok.Getter;
 public class accreditoDTO {
 
     private Long tesseraId;
-
     private Long aziendaId;
-
     private double sommaAcquisto;
 
 }

@@ -6,7 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class livelloDTO {
+
     Long programmaId;
     String nome;
     Integer expNextLevel;
+
 }
