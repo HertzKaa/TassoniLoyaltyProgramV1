@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta; //Mike
 
-import it.unicam.cs.ids.tassoniloyaltyplatform.dto.ProgrammaFedeltaDTO;
+import it.unicam.cs.ids.tassoniloyaltyplatform.dto.programmaFedeltaDTO;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class ProgrammaFedeltaController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED,
             reason = "Programma fedeltà creato correttamente.")
-    public void registraProgrammaFedelta(@RequestBody ProgrammaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException{
+    public void registraProgrammaFedelta(@RequestBody programmaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException{
         programmaFedeltaService.registraProgrammaFedelta(dto);
     }
 

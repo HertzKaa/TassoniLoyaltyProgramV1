@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ProgrammaFedeltaDTO {
+public class programmaFedeltaDTO {
     TipoProgramma tipo;
     Long aziendaId;
     String nome;

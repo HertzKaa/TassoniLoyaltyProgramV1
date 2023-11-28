@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.azienda;
+package it.unicam.cs.ids.tassoniloyaltyplatform.azienda; //Mike
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;

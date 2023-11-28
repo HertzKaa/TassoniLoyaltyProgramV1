@@ -2,7 +2,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta; //mike
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.AziendaService;
-import it.unicam.cs.ids.tassoniloyaltyplatform.dto.ProgrammaFedeltaDTO;
+import it.unicam.cs.ids.tassoniloyaltyplatform.dto.programmaFedeltaDTO;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 //import it.unicam.cs.ids.tassoniloyaltyplatform.iscrizione.Iscrizione;
@@ -50,7 +50,7 @@ public class ProgrammaFedeltaService {
 
 
     @PostMapping
-    public void registraProgrammaFedelta(@RequestBody ProgrammaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException{
+    public void registraProgrammaFedelta(@RequestBody programmaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException{
         Azienda azienda = aziendaService.findAziendaById(dto.getAziendaId());
         for (ProgrammaFedelta p: azienda.getProgrammiFedelta()) {
             if(p.getNome().equals(dto.getNome()))
