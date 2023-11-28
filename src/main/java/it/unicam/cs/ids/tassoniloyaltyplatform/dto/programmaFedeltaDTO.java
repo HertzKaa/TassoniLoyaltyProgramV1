@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.tassoniloyaltyplatform.dto;
+package it.unicam.cs.ids.tassoniloyaltyplatform.dto; //Mike
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.TipoProgramma;
 import lombok.AllArgsConstructor;
