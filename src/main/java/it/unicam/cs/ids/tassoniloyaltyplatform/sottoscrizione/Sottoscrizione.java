@@ -2,6 +2,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
+import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
@@ -30,8 +31,8 @@ public class Sottoscrizione {
 
     @ManyToOne()
     @JsonBackReference
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    private Cliente cliente;
+    @JoinColumn(name = "carta_id", referencedColumnName = "carta_id")
+    private Carta carta;
 
     @ManyToOne()
     @JsonBackReference
@@ -42,25 +43,28 @@ public class Sottoscrizione {
     @JoinColumn(name = "programma_id", referencedColumnName = "programma_id")
     private ProgrammaFedelta programma;
 
+
+
     /**   Costruttore senza Id
-     * @param cliente cliente che attua la sottoscrizione
+     * @param carta cliente che attua la sottoscrizione
      * @param programmaFedelta  programma su cui il cliente è sottoscritto
      */
-    public Sottoscrizione(Cliente cliente, ProgrammaFedelta programmaFedelta) {
-        this.cliente = cliente;
+    public Sottoscrizione(Carta carta, ProgrammaFedelta programmaFedelta) {
+        this.carta = carta;
         this.programma=programmaFedelta;
     }
 
     /**  Costruttore con Id
-     * @param cliente cliente che attua la sottoscrizione
+     * @param carta cliente che attua la sottoscrizione
      * @param programmaFedelta programma su cui il cliente è sottoscritto
      * @param id id della sottoscrizione
      */
-    public Sottoscrizione(Cliente cliente, ProgrammaFedelta programmaFedelta, Long id) {
-        this.cliente = cliente;
+    public Sottoscrizione(Carta carta, ProgrammaFedelta programmaFedelta, Long id) {
+        this.carta=carta;
         this.programma=programmaFedelta;
         this.id=id;
     }
+
     /**
      * Costruttore di default del generico tracker di programmi fedeltà
      */
