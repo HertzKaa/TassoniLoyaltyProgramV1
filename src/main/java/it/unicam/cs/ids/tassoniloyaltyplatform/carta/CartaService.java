@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 public class CartaService {
     private final ClienteService clienteService;
-
     private final CartaRepository cartaRepository;
     @Autowired
     public CartaService(ClienteService clienteService, CartaRepository cartaRepository) {
