@@ -3,6 +3,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.transazione;
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.AziendaService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.CartaService;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.SottoscrizioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class TransazioneService {
 
 
     @PostMapping
-    public void aggiungiAccredito(Long aziendaId, Long tesseraId, double spesa) throws RecordNotFoundException {
+    public void aggiungiAccredito(Long aziendaId, Long tesseraId, double spesa) throws ResourceNotFoundException {
         Transazione nuovoAccredito =
                 new Transazione(this.cartaService.getCartaById(tesseraId),
                         this.aziendaService.findAziendaById(aziendaId),
