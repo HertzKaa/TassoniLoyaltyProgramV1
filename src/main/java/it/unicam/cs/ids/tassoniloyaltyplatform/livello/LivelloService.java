@@ -2,6 +2,9 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.livello;
 
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.dto.livelloDTO;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli;
@@ -33,19 +36,19 @@ public class LivelloService {
     }
 
     @GetMapping
-    public Livello findLivelloByID(Long id) throws RecordNotFoundException{
+    public Livello findLivelloByID(Long id) throws ResourceNotFoundException {
         Optional<Livello> livello = this.livelloRepository.findById(id);
         if(livello.isPresent()) return livello.get();
-        else throw new RecordNotFoundException();
+        else throw new ResourceNotFoundException();
     }
 
     @PostMapping
-    public void aggiungiLivello(livelloDTO dto) throws RecordNotFoundException, RecordAlreadyExistsException {
+    public void aggiungiLivello(livelloDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException {
         ProgrammaFedelta programma = this.programmaService.findProgrammaByID(dto.getProgrammaId());
         if(programma instanceof ProgrammaLivelli programmaLivelli){
             for (Livello l: programmaLivelli.getLivelli()) {
                 if(l.getNome().equals(dto.getNome())){
-                    throw new RecordAlreadyExistsException();
+                    throw new ResourceAlreadyExistsException();
                 }
             }
             Livello nuovoLivello = new Livello(programmaLivelli, dto.getNome(), dto.getExpNextLevel());
@@ -56,13 +59,13 @@ public class LivelloService {
 
     @Transactional
     public void modificaLivello(Long id, String nome, Integer expNextLevel)
-            throws RecordNotFoundException, RecordAlreadyExistsException {
+            throws ResourceNotFoundException, ResourceAlreadyExistsException {
         Livello livello = this.findLivelloByID(id);
 
         if(nome != null && !nome.isEmpty()){
             for (Livello l : livello.getProgramma().getLivelli()) {
                 if (l.getNome().equals(nome)){
-                    throw new RecordAlreadyExistsException();
+                    throw new ResourceAlreadyExistsException();
                 }
             }
             livello.setNome(nome);
@@ -74,7 +77,7 @@ public class LivelloService {
         this.livelloRepository.save(livello);
     }
 
-    public void aggiungiPremio(Livello livello, Premio premio) throws RecordAlreadyExistsException {
+    public void aggiungiPremio(Livello livello, Premio premio) throws ResourceAlreadyExistsException {
         livello.getCatalogoPremi().add(premio);
         this.livelloRepository.save(livello);
     }
