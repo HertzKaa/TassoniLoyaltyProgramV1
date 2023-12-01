@@ -1,6 +1,8 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.livello;
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.dto.livelloDTO;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class LivelloController {
     }
 
     @GetMapping(path = "/{livelloId}")
-    public Livello getLivelloById(@PathVariable("livelloId") Long id) throws RecordNotFoundException {
+    public Livello getLivelloById(@PathVariable("livelloId") Long id) throws ResourceNotFoundException {
         return livelloService.findLivelloByID(id);
     }
 
@@ -40,7 +42,7 @@ public class LivelloController {
     public void modificaLivello(@PathVariable("livelloId") Long id,
                                 @RequestParam String nome,
                                 @RequestParam Integer expNextLevel)
-            throws RecordNotFoundException, RecordAlreadyExistsException {
+            throws ResourceNotFoundException, ResourceAlreadyExistsException {
         this.livelloService.modificaLivello(id, nome, expNextLevel);
     }
 }
