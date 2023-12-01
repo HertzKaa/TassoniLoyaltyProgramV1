@@ -14,10 +14,10 @@ import java.util.List;
 public class ProgrammaLivelli extends ProgrammaFedelta {
 
     @Column(
-            name = "ratio_Exp/Euro",
+            name = "rapporto_Exp/Euro",
             nullable = false
     )
-    private Integer ratioExpEuro;
+    private Integer rapportoExpEuro;
 
 
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -30,12 +30,12 @@ public class ProgrammaLivelli extends ProgrammaFedelta {
 
     public ProgrammaLivelli(Azienda azienda, String nome) {
         super(azienda, nome);
-        this.ratioExpEuro = 100; //valore di default
+        this.rapportoExpEuro = 100; //valore di default
         this.livelli = new ArrayList<>();
     }
 
 
-    public void setRatioExpEuro(Integer ratioExpEuro) {
-        this.ratioExpEuro = ratioExpEuro;
+    public void setRapportoExpEuro(Integer rapportoExpEuro) {
+        this.rapportoExpEuro = rapportoExpEuro;
     }
 }
