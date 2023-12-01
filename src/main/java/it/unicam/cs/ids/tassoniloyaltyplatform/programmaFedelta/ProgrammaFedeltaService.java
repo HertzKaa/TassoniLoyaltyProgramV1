@@ -84,7 +84,7 @@ public class ProgrammaFedeltaService {
     @Transactional
     public void modificaProgrammaLivelli(ProgrammaLivelli programma, Integer ratioExpEuro) throws ResourceNotFoundException{
         if(ratioExpEuro != null && ratioExpEuro > 0){
-            programma.setRatioExpEuro(ratioExpEuro);
+            programma.setRapportoExpEuro(ratioExpEuro);
         }
     }
 
