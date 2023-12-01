@@ -2,6 +2,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione;
 
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.livello.Livello;
+import it.unicam.cs.ids.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter

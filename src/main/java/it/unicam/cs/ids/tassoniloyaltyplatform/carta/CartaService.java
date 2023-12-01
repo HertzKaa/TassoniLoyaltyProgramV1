@@ -34,7 +34,7 @@ public class CartaService {
         return carta.getCliente();
     }
 
-    private Carta getCartaById(Long cartaId) throws ResourceNotFoundException{
+    public Carta getCartaById(Long cartaId) throws ResourceNotFoundException{
         Optional<Carta> optionalCarta = cartaRepository.findById(cartaId);
         if(optionalCarta.isEmpty()){
             throw new ResourceNotFoundException();

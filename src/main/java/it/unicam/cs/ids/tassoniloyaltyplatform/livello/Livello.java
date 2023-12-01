@@ -1,12 +1,14 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.livello;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity(name = "Livello")

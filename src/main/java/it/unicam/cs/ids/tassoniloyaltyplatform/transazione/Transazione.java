@@ -1,73 +1,57 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.transazione; //Stas
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
-import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
+import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Getter
-@Setter
-@ToString
-@Entity(name = "Transazione")
-@Table(name = "transazione")
+@NoArgsConstructor(force = true)
+@Entity(name = "Accredito")
+@Table(name = "accredito")
 public class Transazione {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "transazione_id",
+
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(
+            name = "id_accredito",
+            updatable = false
+    )
+    private Long idAccredito;
+
+    @Column(
+            name = "data",
+            nullable = false
+
+    )
+    private final Date data;
+
+    @ManyToOne @JsonIgnore
+    @JoinColumn(
+            name = "id_tessera",
+            referencedColumnName = "id_tessera",
             nullable = false,
             updatable = false)
-    private Long transazioneId;
+    private final Carta tessera;
 
-    @ManyToOne()
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    private Cliente cliente;
+    @ManyToOne @JsonIgnore
+    @JoinColumn(
+            name = "id_azienda",
+            referencedColumnName = "id_azienda",
+            nullable = false,
+            updatable = false
+    )
+    private final Azienda azienda;
 
-    @ManyToOne()
-    @JoinColumn(name = "azienda_id", referencedColumnName = "azienda_id")
-    private Azienda azienda;
+    private final double spesaAcquisto;
 
-    @Column(name = "importo", nullable = false, updatable = false)
-    private double importo;
-
-    @Column(name = "data_transazione", columnDefinition = "DATE",
-            nullable = false, updatable = false)
-    private Date dataTransazione;
-
-    /**
-     * Costruttore di default per una transazione
-     */
-    public Transazione() {
-    }
-
-    /**
-     * Costruttore in cui vengono passati il cliente che ha eseguito una transazione,
-     * l'azienda che convalida la transazione e la data.
-     *
-     * @param cliente         cliente che ha effettuato la transazione
-     * @param azienda         azienda che convalida la transazione
-     * @param dataTransazione data dell'avvenuta transazione
-     */
-    public Transazione(Cliente cliente, Azienda azienda, double importo, Date dataTransazione) {
-        this.cliente = cliente;
-        this.azienda = azienda;
-        this.importo = importo;
-        this.dataTransazione = dataTransazione;
-    }
-
-    /**
-     * Costruttore completo in cui viene passato come parametro anche l'id della transazione.
-     *
-     * @param transazioneId   id della transazione
-     * @param cliente         cliente che ha effettuato la transazione
-     * @param azienda         azienda che convalida la transazione
-     * @param dataTransazione data dell'avvenuta transazione.
-     */
-    public Transazione(Long transazioneId, Cliente cliente, Azienda azienda, double importo, Date dataTransazione) {
-        this(cliente, azienda, importo, dataTransazione);
-        this.transazioneId = transazioneId;
+    public Transazione( Carta tessera, Azienda azienda, Date data, double spesaAcquisto) {
+        this.tessera=tessera;
+        this.azienda=azienda;
+        this.data=data;
+        this.spesaAcquisto=spesaAcquisto;
     }
 }

@@ -7,6 +7,8 @@ import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsEx
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 //import it.unicam.cs.ids.tassoniloyaltyplatform.iscrizione.Iscrizione;
 //import it.unicam.cs.ids.tassoniloyaltyplatform.livello.Livello;
+import it.unicam.cs.ids.tassoniloyaltyplatform.livello.Livello;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,17 +94,16 @@ public class ProgrammaFedeltaService {
         this.programmaRepository.deleteById(id);
     }
 
-    /* public void rimuoviIscrizione(Iscrizione iscrizione) {
+    public void rimuoviIscrizione(Sottoscrizione iscrizione) {
         iscrizione.getProgramma().getIscrizioni().remove(iscrizione);
         programmaRepository.save(iscrizione.getProgramma());
-    } */
-
-    /* public void aggiungiLivello(ProgrammaLivelli programma, Livello livello) throws ResourceAlreadyExistsException {
+    }
+     public void aggiungiLivello(ProgrammaLivelli programma, Livello livello) throws ResourceAlreadyExistsException {
         List<Livello> livelliProgramma = programma.getLivelli();
         if(!livelliProgramma.isEmpty()) {
             livelliProgramma.get(livelliProgramma.size() - 1).notUltimo();
         }
         programma.getLivelli().add(livello);
         programmaRepository.save(programma);
-    } */
+    }
 }
