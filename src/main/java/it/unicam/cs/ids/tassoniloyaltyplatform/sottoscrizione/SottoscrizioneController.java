@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione;
 
-import it.unicam.cs.ids.tassoniloyaltyplatform.dto.SottoscrizioneDTO;
+import it.unicam.cs.ids.tassoniloyaltyplatform.dto.sottoscrizioneDTO;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ private SottoscrizioneService sottoscrizioneService;
     }
 
     @PostMapping
-    public ResponseEntity<Object> registraNuovaSottoscrizione(@RequestBody @Validated SottoscrizioneDTO dto) {
+    public ResponseEntity<Object> registraNuovaSottoscrizione(@RequestBody @Validated sottoscrizioneDTO dto) {
         try {
             Sottoscrizione newSub = sottoscrizioneService.addNewSottoscrizione(dto.getCartaId(), dto.getProgrammaId());
             return ResponseEntity.status(HttpStatus.CREATED).body(newSub);
