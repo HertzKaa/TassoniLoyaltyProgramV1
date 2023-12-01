@@ -27,5 +27,6 @@ public class SottoscrizioneService {
     }
 
     public List<Sottoscrizione> getSottoscrizioni() {
+
     }
 }
