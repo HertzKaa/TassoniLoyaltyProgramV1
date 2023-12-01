@@ -22,15 +22,15 @@ public class Carta {
     @OneToOne
     @JsonBackReference
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    private Cliente cliente;
+    private Cliente clienteId;
 
     public Carta(Long cartaId, Cliente cliente) {
         this.cartaId = cartaId;
-        this.cliente = cliente;
+        this.clienteId = clienteId;
     }
 
     public Carta(Cliente cliente) {
-        this.cliente = cliente;
+        this.clienteId = clienteId;
     }
 
     public Carta() {
@@ -41,11 +41,11 @@ public class Carta {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Carta carta = (Carta) o;
-        return Objects.equals(getCartaId(), carta.getCartaId()) && Objects.equals(getCliente(), carta.getCliente());
+        return Objects.equals(getCartaId(), carta.getCartaId()) && Objects.equals(getClienteId(), carta.getClienteId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCartaId(), getCliente());
+        return Objects.hash(getCartaId(), getClienteId());
     }
 }

@@ -31,7 +31,7 @@ public class CartaService {
 
     public Cliente getClienteByIdCarta(Long cartaId) throws ResourceNotFoundException{
         Carta carta = getCartaById(cartaId);
-        return carta.getCliente();
+        return carta.getClienteId();
     }
 
     public Carta getCartaById(Long cartaId) throws ResourceNotFoundException{
