@@ -7,10 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SottoscrizioneDTO {
+public class sottoscrizioneDTO {
 
     Long cartaId;
     Long programmaId;
-
 
 }
