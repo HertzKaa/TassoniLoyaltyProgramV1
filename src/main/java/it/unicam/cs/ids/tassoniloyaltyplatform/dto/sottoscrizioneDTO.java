@@ -11,5 +11,6 @@ public class sottoscrizioneDTO {
 
     Long cartaId;
     Long programmaId;
+    Long clienteId;
 
 }
