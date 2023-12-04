@@ -1,7 +1,7 @@
 package it.unicam.cs.ids.tassoniloyaltyplatform.azienda; //Stas
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.unicam.cs.ids.tassoniloyaltyplatform.transazione.Transazione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import jakarta.persistence.*;
 import lombok.ToString;
@@ -40,14 +40,14 @@ public class Azienda {
     @JsonIgnore
     @OneToMany(mappedBy = "azienda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<Transazione> transazioni;
+    private List<Sottoscrizione> sottoscrizioni;
 
     /**
      * Costruttore di default dell'azienda
      */
     public Azienda() {
         programmiFedelta = new ArrayList<>();
-        transazioni = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
     }
 
     /**
@@ -62,7 +62,7 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         this.programmiFedelta = new ArrayList<>();
-        this.transazioni = new ArrayList<>();
+        this.sottoscrizioni = new ArrayList<>();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Azienda {
         this.indirizzo = indirizzo;
         this.pIva = pIva;
         this.programmiFedelta = new ArrayList<>();
-        this.transazioni = new ArrayList<>();
+        this.sottoscrizioni = new ArrayList<>();
     }
 
     public Long getAziendaId() {
@@ -120,11 +120,11 @@ public class Azienda {
         this.programmiFedelta = programmiFedelta;
     }
 
-    public List<Transazione> getTransazioni() {
-        return transazioni;
+    public List<Sottoscrizione> getSottoscrizioni() {
+        return sottoscrizioni;
     }
 
-    public void setTransazioni(List<Transazione> transazioni) {
-        this.transazioni = transazioni;
+    public void setSottoscrizioni(List<Sottoscrizione> sottoscrizioni) {
+        this.sottoscrizioni = sottoscrizioni;
     }
 }
