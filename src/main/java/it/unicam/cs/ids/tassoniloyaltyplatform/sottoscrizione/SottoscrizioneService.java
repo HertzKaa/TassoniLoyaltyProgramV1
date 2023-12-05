@@ -4,6 +4,7 @@ import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.CartaService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SottoscrizioneService {
@@ -96,5 +98,9 @@ public class SottoscrizioneService {
         }
     }
 
-
+    public List<Premio> visualizzaVantaggiProgrammaLivelli(Long idIscrizione) throws ResourceNotFoundException {
+        return ((ProgrammaLivelli) getSottoscrizioneByID(idIscrizione).getProgramma()).getLivelli().stream()
+                .flatMap(l->l.getCatalogoPremi().stream())
+                .collect(Collectors.toList());
+    }
 }
