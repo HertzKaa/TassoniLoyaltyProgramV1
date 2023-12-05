@@ -39,14 +39,10 @@ private final SottoscrizioneService sottoscrizioneService;
         sottoscrizioneService.deleteSottoscrizione(sottoscrizioneId);
     }
 
-    @GetMapping(path = "/{sottoscrizioneId}/premi/{premioId}/riscatto")
-    public ResponseEntity<Sottoscrizione> riscattaPremio(@PathVariable("sottoscrizioneId") Long sottoscrizioneId, @PathVariable("premioId") Long premioId){
-        try{
-            Sottoscrizione updatedSub = sottoscrizioneService.riscattaPremio(sottoscrizioneId,premioId);
-            return new ResponseEntity<>(updatedSub, HttpStatus.OK);
-        } catch(RuntimeException e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping(path = "/riscattapremio/{premioId}")
+    @ResponseStatus(value = HttpStatus.OK, reason = "Premio riscattato.")
+    public Premio riscattaPremioLivelli(@PathVariable("premioId") Long premioId, @RequestParam Long iscrizioneId) throws RecordNotFoundException {
+        return sottoscrizioneService.riscattaPremio(premioId, iscrizioneId);
     }
 
     @GetMapping(path = "/{iscrizioneId}")

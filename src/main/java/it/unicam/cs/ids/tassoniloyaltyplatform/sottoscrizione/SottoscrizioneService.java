@@ -4,6 +4,7 @@ import it.unicam.cs.ids.tassoniloyaltyplatform.carta.Carta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.carta.CartaService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.livello.Livello;
 import it.unicam.cs.ids.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedelta;
 import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaFedeltaService;
@@ -11,10 +12,7 @@ import it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,18 +31,11 @@ public class SottoscrizioneService {
         this.programmaFedeltaService = programmaFedeltaService;
         this.cartaService = cartaService;
     }
-
-    public void deleteSottoscrizione(Long sottoscrizioneId) {
-    }
-
-    public Sottoscrizione addNewSottoscrizione(Long cartaId, Long programmaId) {
-
-    }
     @GetMapping
     public List<Sottoscrizione> getSottoscrizioni() {
       return sottoscrizioneRepository.findAll();
     }
-    public Sottoscrizione getSottoscrizioneByID(Long id) throws ResourceNotFoundException{
+    public Sottoscrizione getSottoscrizioneById(Long id) throws ResourceNotFoundException{
         Optional<Sottoscrizione> sottoscrizione = sottoscrizioneRepository.findById(id);
         if(sottoscrizione.isPresent()) return sottoscrizione.get();
         else throw new ResourceNotFoundException();
@@ -65,7 +56,7 @@ public class SottoscrizioneService {
     @ResponseStatus(value = HttpStatus.OK, reason = "Iscrizione aggiornata")
     public void aggiornaIscrizione(Long idAzienda, Long cartaId, double spesa) throws ResourceNotFoundException{
 
-        List<Sottoscrizione> daAggiornare = cartaService.getCartaById(idTessera).getSottoscrizioni().stream()
+        List<Sottoscrizione> daAggiornare = cartaService.getCartaById(cartaId).getSottoscrizioni().stream()
                 .filter(i -> i.getProgramma().getAzienda().getAziendaId().equals(idAzienda))
                 .toList();
         daAggiornare.stream().
@@ -99,8 +90,44 @@ public class SottoscrizioneService {
     }
 
     public List<Premio> visualizzaVantaggiProgrammaLivelli(Long idIscrizione) throws ResourceNotFoundException {
-        return ((ProgrammaLivelli) getSottoscrizioneByID(idIscrizione).getProgramma()).getLivelli().stream()
+        return ((ProgrammaLivelli) getSottoscrizioneById(idIscrizione).getProgramma()).getLivelli().stream()
                 .flatMap(l->l.getCatalogoPremi().stream())
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping
+    public void cancellaIscrizione(Long id) throws ResourceNotFoundException{
+        Sottoscrizione sottoscrizioneDaCancellare = getSottoscrizioneById(id);
+        programmaFedeltaService.rimuoviIscrizione(sottoscrizioneDaCancellare);
+        cartaService.rimuoviSottoscrizione(sottoscrizioneDaCancellare);
+        sottoscrizioneRepository.deleteById(id);
+    }
+
+    public List<Premio> premiRiscattabiliLivelli(Long iscrizioneId) throws ResourceNotFoundException {
+        SottoscrizioneLivelli sottoscrizione= (SottoscrizioneLivelli) getSottoscrizioneById(iscrizioneId);
+        List<Livello> livelliSbloccati = ((ProgrammaLivelli)sottoscrizione.getProgramma()).getLivelli().stream()
+                .filter(l ->((ProgrammaLivelli) sottoscrizione.getProgramma()).
+                        getLivelli().indexOf(l) <= ((ProgrammaLivelli) sottoscrizione.getProgramma()).
+                        getLivelli().indexOf(sottoscrizione.getLivelloCorrente()))
+                .toList();
+        return livelliSbloccati.stream()
+                .flatMap(livello -> livello.getCatalogoPremi().stream())
+                .filter(p -> !sottoscrizione.getPremiRiscattati().contains(p))
+                .collect(Collectors.toList());
+    }
+
+    public Premio riscattaPremio(Long idPremio, Long sottoscrizioneId) throws ResourceNotFoundException {
+        SottoscrizioneLivelli iscrizione = (SottoscrizioneLivelli) getSottoscrizioneById(sottoscrizioneId);
+        Optional<Premio>isPremioRiscattabile = premiRiscattabiliLivelli(sottoscrizioneId).stream()
+                .filter(p -> p.getPremioId().equals(idPremio))
+                .findFirst();
+        Optional<Premio> isPremioGiaRiscattato = iscrizione.getPremiRiscattati().stream()
+                .filter(p -> p.getPremioId().equals(idPremio))
+                .findFirst();
+        if(isPremioRiscattabile.isPresent() && isPremioGiaRiscattato.isEmpty()){
+            iscrizione.getPremiRiscattati().add(isPremioRiscattabile.get());
+            sottoscrizioneRepository.save(iscrizione);
+            return isPremioRiscattabile.get();
+        } else throw new ResourceNotFoundException();
     }
 }

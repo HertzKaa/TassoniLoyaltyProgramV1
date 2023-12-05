@@ -3,6 +3,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.ClienteService;
 import it.unicam.cs.ids.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,9 @@ public class CartaService {
         } else {
             return optionalCliente.get();
         }
+    }
+    public void rimuoviSottoscrizione(Sottoscrizione iscrizione){
+        iscrizione.getCarta().getSottoscrizioni().remove(iscrizione);
+        cartaRepository.save(iscrizione.getCarta());
     }
 }
