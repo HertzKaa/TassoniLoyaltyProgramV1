@@ -24,24 +24,20 @@ private final SottoscrizioneService sottoscrizioneService;
         return sottoscrizioneService.getSottoscrizioni();
     }
 
-    @PostMapping
-    public ResponseEntity<Object> registraNuovaSottoscrizione(@RequestBody @Validated sottoscrizioneDTO dto) {
-        try {
-            Sottoscrizione newSub = sottoscrizioneService.addNewSottoscrizione(dto.getClienteId(), dto.getProgrammaId());
-            return ResponseEntity.status(HttpStatus.CREATED).body(newSub);
-        } catch (ResourceNotFoundException | ResourceAlreadyExistsException e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    @PostMapping(path = "/{tesseraId}/programma/{programmaId}")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void registraIscrizione(@PathVariable("cartaId") Long cartaId, @PathVariable("programmaId") Long programmaId) throws ResourceNotFoundException {
+        sottoscrizioneService.registraSottoscrizione(cartaId, programmaId);
     }
 
     @DeleteMapping(path = "{sottoscrizioneId}")
     public void deleteSottoscrizione(@PathVariable("sottoscrizioneId") Long sottoscrizioneId) {
-        sottoscrizioneService.deleteSottoscrizione(sottoscrizioneId);
+        sottoscrizioneService.cancellaSottoscrizione(sottoscrizioneId);
     }
 
     @PutMapping(path = "/riscattapremio/{premioId}")
     @ResponseStatus(value = HttpStatus.OK, reason = "Premio riscattato.")
-    public Premio riscattaPremioLivelli(@PathVariable("premioId") Long premioId, @RequestParam Long iscrizioneId) throws RecordNotFoundException {
+    public Premio riscattaPremioLivelli(@PathVariable("premioId") Long premioId, @RequestParam Long iscrizioneId) throws ResourceNotFoundException {
         return sottoscrizioneService.riscattaPremio(premioId, iscrizioneId);
     }
 

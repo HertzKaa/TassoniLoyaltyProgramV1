@@ -42,7 +42,7 @@ public class SottoscrizioneService {
     }
 
     @PostMapping
-    public void registraIscrizione(Long cartaId, Long programmaId) throws ResourceNotFoundException {
+    public void registraSottoscrizione(Long cartaId, Long programmaId) throws ResourceNotFoundException {
         Carta carta = cartaService.getCartaById(cartaId);
         ProgrammaFedelta programma = programmaFedeltaService.findProgrammaByID(programmaId);
         Sottoscrizione newSottoscrizione = FactorySottoscrizioni.creaSottoscrizione(programma,carta);
@@ -96,7 +96,7 @@ public class SottoscrizioneService {
     }
 
     @DeleteMapping
-    public void cancellaIscrizione(Long id) throws ResourceNotFoundException{
+    public void cancellaSottoscrizione(Long id) throws ResourceNotFoundException{
         Sottoscrizione sottoscrizioneDaCancellare = getSottoscrizioneById(id);
         programmaFedeltaService.rimuoviIscrizione(sottoscrizioneDaCancellare);
         cartaService.rimuoviSottoscrizione(sottoscrizioneDaCancellare);
