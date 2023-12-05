@@ -8,15 +8,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FactorySottoscrizioni {
-    @Autowired
+
     public FactorySottoscrizioni(){
 
     }
 
-    public Sottoscrizione creaSottoscrizione(ProgrammaFedelta programmaFedelta, Carta tessera){
+
+
+    public static Sottoscrizione creaSottoscrizione(ProgrammaFedelta programmaFedelta, Carta carta){
 
         if(programmaFedelta instanceof ProgrammaLivelli programmaLivelli){
-            return new SottoscrizioneLivelli(programmaLivelli,tessera);
+            return new SottoscrizioneLivelli(programmaLivelli,carta);
         }else {
             //altri tipi di iscrizione
             return null;

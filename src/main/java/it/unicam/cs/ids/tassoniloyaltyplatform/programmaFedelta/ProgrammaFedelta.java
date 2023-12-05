@@ -3,6 +3,7 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.programmaFedelta; //Mike
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.tassoniloyaltyplatform.azienda.Azienda;
 //import it.unicam.cs.ids.tassoniloyaltyplatform.iscrizione.Iscrizione;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -33,7 +34,7 @@ public abstract class ProgrammaFedelta {
 
     @JsonIgnore
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL)
-    private List<Iscrizione> iscrizioni;
+    private List<Sottoscrizione> sottoscrizioni;
 
     @Column(
             name = "nome",
@@ -47,7 +48,7 @@ public abstract class ProgrammaFedelta {
      * Costruttore di default
      */
     public ProgrammaFedelta() {
-        iscrizioni = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
     }
 
     /**
@@ -58,7 +59,7 @@ public abstract class ProgrammaFedelta {
      */
     public ProgrammaFedelta(Azienda azienda, String nome) {
 
-        iscrizioni = new ArrayList<>();
+        sottoscrizioni = new ArrayList<>();
         this.azienda = azienda;
         this.nome = nome;
     }

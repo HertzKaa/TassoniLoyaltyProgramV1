@@ -56,11 +56,11 @@ private final SottoscrizioneService sottoscrizioneService;
 
     @GetMapping(path = "/vantaggidisponibili/{iscrizioneId}")
     public List<Premio> visualizzaPremiRiscattabiliLivelli(@PathVariable("iscrizioneId") Long iscrizioneId) throws ResourceNotFoundException {
-        return iscrizioneService.premiRiscattabiliLivelli(iscrizioneId);
+        return sottoscrizioneService.premiRiscattabiliLivelli(iscrizioneId);
     }
     @GetMapping(path = "/vantaggi/{iscrizioneId}")
     public List<Premio> visualizzaVantaggiProgrammaLivelli(@PathVariable("iscrizioneId") Long iscrizioneId) throws Exception {
-        return iscrizioneService.visualizzaVantaggiProgrammaLivelli(iscrizioneId);
+        return sottoscrizioneService.visualizzaVantaggiProgrammaLivelli(iscrizioneId);
     }
 
 }

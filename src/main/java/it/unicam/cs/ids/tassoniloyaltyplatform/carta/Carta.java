@@ -2,11 +2,14 @@ package it.unicam.cs.ids.tassoniloyaltyplatform.carta; //Stas
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.cs.ids.tassoniloyaltyplatform.cliente.Cliente;
+import it.unicam.cs.ids.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -23,17 +26,22 @@ public class Carta {
     @JsonBackReference
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente clienteId;
-
+    @OneToMany(mappedBy = "carta", cascade = CascadeType.ALL)
+    private final List<Sottoscrizione> sottoscrizioni;
     public Carta(Long cartaId, Cliente cliente) {
         this.cartaId = cartaId;
         this.clienteId = clienteId;
+        this.sottoscrizioni= new ArrayList<>();
     }
 
     public Carta(Cliente cliente) {
+
         this.clienteId = clienteId;
+        this.sottoscrizioni= new ArrayList<>();
     }
 
     public Carta() {
+        this.sottoscrizioni= new ArrayList<>();
     }
 
     @Override
