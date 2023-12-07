@@ -32,13 +32,13 @@ public class TransazioneService {
         this.cartaService = cartaService;
     }
 
-    public List<Transazione> getAccrediti() {
+    public List<Transazione> getTransazioni() {
         return transazioneRepository.findAll();
     }
 
 
     @PostMapping
-    public void aggiungiAccredito(Long aziendaId, Long tesseraId, double spesa) throws ResourceNotFoundException {
+    public void aggiungiTransazione(Long aziendaId, Long tesseraId, double spesa) throws ResourceNotFoundException {
         Transazione nuovoAccredito =
                 new Transazione(this.cartaService.getCartaById(tesseraId),
                         this.aziendaService.findAziendaById(aziendaId),

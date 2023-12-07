@@ -35,7 +35,7 @@ public class Transazione {
             referencedColumnName = "id_tessera",
             nullable = false,
             updatable = false)
-    private final Carta tessera;
+    private final Carta carta;
 
     @ManyToOne @JsonIgnore
     @JoinColumn(
@@ -48,8 +48,8 @@ public class Transazione {
 
     private final double spesaAcquisto;
 
-    public Transazione( Carta tessera, Azienda azienda, Date data, double spesaAcquisto) {
-        this.tessera=tessera;
+    public Transazione( Carta carta, Azienda azienda, Date data, double spesaAcquisto) {
+        this.carta=carta;
         this.azienda=azienda;
         this.data=data;
         this.spesaAcquisto=spesaAcquisto;
