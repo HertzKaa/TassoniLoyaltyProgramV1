@@ -1,4 +1,4 @@
-package it.unicam.loyaltyplatform.security.jwt;
+package it.unicam.tassoniloyaltyplatform.security.jwt;
 
 import java.io.IOException;
 import java.util.HashMap;

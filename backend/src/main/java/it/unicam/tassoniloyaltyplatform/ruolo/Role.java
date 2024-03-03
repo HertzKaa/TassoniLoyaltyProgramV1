@@ -1,4 +1,4 @@
-package it.unicam.loyaltyplatform.ruolo;
+package it.unicam.tassoniloyaltyplatform.ruolo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

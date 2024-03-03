@@ -1,10 +1,10 @@
-package it.unicam.loyaltyplatform.security.jwt;
+package it.unicam.tassoniloyaltyplatform.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Jwts;
-import it.unicam.loyaltyplatform.cliente.services.DettagliClienteImpl;
+import it.unicam.tassoniloyaltyplatform.cliente.services.DettagliClienteImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

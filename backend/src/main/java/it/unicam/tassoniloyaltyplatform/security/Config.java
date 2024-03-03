@@ -1,14 +1,14 @@
-package it.unicam.loyaltyplatform.security;
+package it.unicam.tassoniloyaltyplatform.security;
 
-import it.unicam.loyaltyplatform.azienda.Azienda;
-import it.unicam.loyaltyplatform.azienda.AziendaService;
-import it.unicam.loyaltyplatform.dtos.LivelloDTO;
-import it.unicam.loyaltyplatform.dtos.ProgrammaFedeltaDTO;
-import it.unicam.loyaltyplatform.livello.LivelloService;
-import it.unicam.loyaltyplatform.programmaFedelta.*;
-import it.unicam.loyaltyplatform.ruolo.ERole;
-import it.unicam.loyaltyplatform.ruolo.Role;
-import it.unicam.loyaltyplatform.ruolo.RoleRepository;
+import it.unicam.tassoniloyaltyplatform.azienda.Azienda;
+import it.unicam.tassoniloyaltyplatform.azienda.AziendaService;
+import it.unicam.tassoniloyaltyplatform.dtos.LivelloDTO;
+import it.unicam.tassoniloyaltyplatform.dtos.ProgrammaFedeltaDTO;
+import it.unicam.tassoniloyaltyplatform.livello.LivelloService;
+import it.unicam.tassoniloyaltyplatform.programmaFedelta.*;
+import it.unicam.tassoniloyaltyplatform.ruolo.ERole;
+import it.unicam.tassoniloyaltyplatform.ruolo.Role;
+import it.unicam.tassoniloyaltyplatform.ruolo.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

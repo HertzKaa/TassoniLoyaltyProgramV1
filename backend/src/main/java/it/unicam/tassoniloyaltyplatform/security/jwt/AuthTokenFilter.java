@@ -1,7 +1,7 @@
-package it.unicam.loyaltyplatform.security.jwt;
+package it.unicam.tassoniloyaltyplatform.security.jwt;
 import java.io.IOException;
 
-import it.unicam.loyaltyplatform.cliente.services.DettagliClienteServiceImpl;
+import it.unicam.tassoniloyaltyplatform.cliente.services.DettagliClienteServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

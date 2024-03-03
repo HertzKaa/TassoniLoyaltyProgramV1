@@ -1,4 +1,4 @@
-package it.unicam.loyaltyplatform.security.payload.response;
+package it.unicam.tassoniloyaltyplatform.security.payload.response;
 
 import java.util.List;
 

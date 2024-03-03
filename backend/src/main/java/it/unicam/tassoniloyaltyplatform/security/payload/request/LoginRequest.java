@@ -1,4 +1,4 @@
-package it.unicam.loyaltyplatform.security.payload.request;
+package it.unicam.tassoniloyaltyplatform.security.payload.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
