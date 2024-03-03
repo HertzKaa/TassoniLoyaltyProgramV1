@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.programmaFedelta; //Mike
+package it.unicam.tassoniloyaltyplatform.programmaFedelta;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

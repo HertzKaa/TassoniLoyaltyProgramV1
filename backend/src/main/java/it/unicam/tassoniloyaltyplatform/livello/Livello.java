@@ -5,7 +5,6 @@ import it.unicam.tassoniloyaltyplatform.premio.Premio;
 import it.unicam.tassoniloyaltyplatform.programmaFedelta.ProgrammaLivelli;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +13,13 @@ import java.util.List;
 @Entity(name = "Livello")
 @Table(name = "livello")
 public class Livello {
-
-    @Getter
-    @jakarta.persistence.Id
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(
             name = "id_livello",
             updatable = false
     )
     private Long id;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
@@ -73,7 +70,5 @@ public class Livello {
     public void notUltimo(){
         this.ultimoLivello = false;
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.programmaFedelta; //Mike
+package it.unicam.tassoniloyaltyplatform.programmaFedelta;
 
 import it.unicam.tassoniloyaltyplatform.azienda.Azienda;
 import it.unicam.tassoniloyaltyplatform.livello.Livello;
@@ -14,10 +14,10 @@ import java.util.List;
 public class ProgrammaLivelli extends ProgrammaFedelta {
 
     @Column(
-            name = "rapporto_Exp/Euro",
+            name = "ratio_Exp/Euro",
             nullable = false
     )
-    private Integer rapportoExpEuro;
+    private Integer ratioExpEuro;
 
 
     @OneToMany(mappedBy = "programma", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -30,12 +30,12 @@ public class ProgrammaLivelli extends ProgrammaFedelta {
 
     public ProgrammaLivelli(Azienda azienda, String nome) {
         super(azienda, nome);
-        this.rapportoExpEuro = 100; //valore di default
+        this.ratioExpEuro = 100; //valore di default
         this.livelli = new ArrayList<>();
     }
 
 
-    public void setRapportoExpEuro(Integer rapportoExpEuro) {
-        this.rapportoExpEuro = rapportoExpEuro;
+    public void setRatioExpEuro(Integer ratioExpEuro) {
+        this.ratioExpEuro = ratioExpEuro;
     }
 }

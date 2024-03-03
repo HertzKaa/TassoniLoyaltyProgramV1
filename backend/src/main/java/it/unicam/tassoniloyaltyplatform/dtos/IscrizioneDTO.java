@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.dto; //Mike
+package it.unicam.tassoniloyaltyplatform.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class sottoscrizioneDTO {
+public class IscrizioneDTO {
 
     Long cartaId;
     Long programmaId;

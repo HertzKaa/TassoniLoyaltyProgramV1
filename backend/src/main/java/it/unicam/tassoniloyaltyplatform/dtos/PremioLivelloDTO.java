@@ -1,11 +1,11 @@
-package it.unicam.tassoniloyaltyplatform.dto; //Mike
+package it.unicam.tassoniloyaltyplatform.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class premioLivelloDTO {
+public class PremioLivelloDTO {
 
     Long livelloId;
     String nome;

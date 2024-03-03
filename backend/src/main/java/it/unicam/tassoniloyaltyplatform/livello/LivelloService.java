@@ -1,7 +1,7 @@
 package it.unicam.tassoniloyaltyplatform.livello;
 
 
-import it.unicam.tassoniloyaltyplatform.dto.livelloDTO;
+import it.unicam.tassoniloyaltyplatform.dtos.LivelloDTO;
 import it.unicam.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
 import it.unicam.tassoniloyaltyplatform.exception.ResourceNotFoundException;
 import it.unicam.tassoniloyaltyplatform.premio.Premio;
@@ -43,7 +43,7 @@ public class LivelloService {
     }
 
     @PostMapping
-    public void aggiungiLivello(livelloDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+    public void aggiungiLivello(LivelloDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException {
         ProgrammaFedelta programma = this.programmaService.findProgrammaByID(dto.getProgrammaId());
         if(programma instanceof ProgrammaLivelli programmaLivelli){
             for (Livello l: programmaLivelli.getLivelli()) {

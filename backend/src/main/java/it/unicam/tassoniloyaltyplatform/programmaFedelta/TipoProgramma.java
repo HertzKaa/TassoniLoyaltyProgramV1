@@ -1,9 +1,9 @@
-package it.unicam.tassoniloyaltyplatform.programmaFedelta; //Mike
+package it.unicam.tassoniloyaltyplatform.programmaFedelta;
 
 public enum TipoProgramma {
     punti,
     livelli,
-    coalizioni,
-    membership,
-    cashback;
+    cashback,
+    vip,
+    coalizione;
 }

@@ -1,8 +1,8 @@
-package it.unicam.tassoniloyaltyplatform.programmaFedelta; //Mike
+package it.unicam.tassoniloyaltyplatform.programmaFedelta;
 
-import it.unicam.tassoniloyaltyplatform.dto.programmaFedeltaDTO;
-import it.unicam.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
-import it.unicam.tassoniloyaltyplatform.exception.ResourceNotFoundException;
+import it.unicam.tassoniloyaltyplatform.dtos.ProgrammaFedeltaDTO;
+import it.unicam.tassoniloyaltyplatform.eccezioni.RecordAlreadyExistsException;
+import it.unicam.tassoniloyaltyplatform.eccezioni.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class ProgrammaFedeltaController {
     }
 
     @GetMapping(path = "/{programmaId}")
-    public ProgrammaFedelta getProgrammaById(@PathVariable("programmaId") Long id) throws ResourceNotFoundException {
+    public ProgrammaFedelta getProgrammaById(@PathVariable("programmaId") Long id) throws RecordNotFoundException {
         return programmaFedeltaService.findProgrammaByID(id);
     }
 
@@ -45,7 +45,7 @@ public class ProgrammaFedeltaController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED,
             reason = "Programma fedeltà creato correttamente.")
-    public void registraProgrammaFedelta(@RequestBody programmaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+    public void registraProgrammaFedelta(@RequestBody ProgrammaFedeltaDTO dto) throws RecordNotFoundException, RecordAlreadyExistsException{
         programmaFedeltaService.registraProgrammaFedelta(dto);
     }
 
@@ -55,14 +55,14 @@ public class ProgrammaFedeltaController {
     public void modificaProgramma(@PathVariable("programmaId") Long id,
                                   @RequestParam (required = false) String nome,
                                   @RequestParam (required = false) Integer ratioExpEuro)
-            throws ResourceNotFoundException, ResourceAlreadyExistsException {
+            throws RecordNotFoundException, RecordAlreadyExistsException {
         programmaFedeltaService.modificaProgramma(id, nome, ratioExpEuro);
     }
 
     @DeleteMapping(path = "/{programmaId}")
     @ResponseStatus(value = HttpStatus.OK,
             reason = "Programma fedeltà eliminato.")
-    public void cancellaProgrammaFedelta(@PathVariable("programmaId") Long id) throws ResourceNotFoundException {
+    public void cancellaProgrammaFedelta(@PathVariable("programmaId") Long id) throws RecordNotFoundException {
         programmaFedeltaService.cancellaProgrammaFedelta(id);
     }
 

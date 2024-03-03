@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.sottoscrizione;
+package it.unicam.tassoniloyaltyplatform.iscrizione;
 
 import it.unicam.tassoniloyaltyplatform.carta.Carta;
 import it.unicam.tassoniloyaltyplatform.carta.CartaService;

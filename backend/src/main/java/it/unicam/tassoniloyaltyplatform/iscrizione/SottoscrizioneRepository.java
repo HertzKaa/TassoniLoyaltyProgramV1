@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.sottoscrizione;
+package it.unicam.tassoniloyaltyplatform.iscrizione;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

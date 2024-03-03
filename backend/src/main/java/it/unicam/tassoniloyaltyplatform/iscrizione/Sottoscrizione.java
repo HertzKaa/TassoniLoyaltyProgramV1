@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.sottoscrizione;
+package it.unicam.tassoniloyaltyplatform.iscrizione;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.tassoniloyaltyplatform.azienda.Azienda;

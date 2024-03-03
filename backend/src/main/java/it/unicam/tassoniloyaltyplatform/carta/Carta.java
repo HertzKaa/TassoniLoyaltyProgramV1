@@ -2,7 +2,7 @@ package it.unicam.tassoniloyaltyplatform.carta; //Stas
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.unicam.tassoniloyaltyplatform.cliente.Cliente;
-import it.unicam.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
+import it.unicam.tassoniloyaltyplatform.iscrizione.Sottoscrizione;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

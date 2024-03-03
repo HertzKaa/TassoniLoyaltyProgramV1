@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name = "Premio")
 @Table(name = "premio")
+
 public class Premio {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(
-            name = "id_premio"
+            name ="id_premio"
     )
-    private  Long premioId;
+    private Long premioId;
 
     @ManyToOne @JsonIgnore
     @JoinColumn(
@@ -38,12 +39,9 @@ public class Premio {
     )
     private String descrizione;
 
-    public Premio(Livello livello, String nome, String descrizione){
-        this.livello=livello;
-        this.nome=nome;
-        this.descrizione=descrizione;
-
+    public Premio(Livello livello, String nome, String descrizione) {
+        this.livello = livello;
+        this.nome = nome;
+        this.descrizione = descrizione;
     }
-
-
 }

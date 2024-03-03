@@ -3,7 +3,7 @@ package it.unicam.tassoniloyaltyplatform.carta; //Stas
 import it.unicam.tassoniloyaltyplatform.cliente.Cliente;
 import it.unicam.tassoniloyaltyplatform.cliente.ClienteService;
 import it.unicam.tassoniloyaltyplatform.exception.ResourceNotFoundException;
-import it.unicam.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
+import it.unicam.tassoniloyaltyplatform.iscrizione.Sottoscrizione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

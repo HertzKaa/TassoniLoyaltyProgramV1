@@ -1,14 +1,12 @@
-package it.unicam.tassoniloyaltyplatform.programmaFedelta; //mike
+package it.unicam.tassoniloyaltyplatform.programmaFedelta;
 
 import it.unicam.tassoniloyaltyplatform.azienda.Azienda;
 import it.unicam.tassoniloyaltyplatform.azienda.AziendaService;
-import it.unicam.tassoniloyaltyplatform.dto.programmaFedeltaDTO;
-import it.unicam.tassoniloyaltyplatform.exception.ResourceAlreadyExistsException;
-import it.unicam.tassoniloyaltyplatform.exception.ResourceNotFoundException;
-//import it.unicam.cs.ids.tassoniloyaltyplatform.iscrizione.Iscrizione;
-//import it.unicam.cs.ids.tassoniloyaltyplatform.livello.Livello;
+import it.unicam.tassoniloyaltyplatform.dtos.ProgrammaFedeltaDTO;
+import it.unicam.tassoniloyaltyplatform.eccezioni.RecordAlreadyExistsException;
+import it.unicam.tassoniloyaltyplatform.eccezioni.RecordNotFoundException;
+import it.unicam.tassoniloyaltyplatform.iscrizione.Iscrizione;
 import it.unicam.tassoniloyaltyplatform.livello.Livello;
-import it.unicam.tassoniloyaltyplatform.sottoscrizione.Sottoscrizione;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,10 +37,10 @@ public class ProgrammaFedeltaService {
     }
 
     @GetMapping
-    public ProgrammaFedelta findProgrammaByID(Long id) throws ResourceNotFoundException {
+    public ProgrammaFedelta findProgrammaByID(Long id) throws RecordNotFoundException{
         Optional<ProgrammaFedelta> programma = programmaRepository.findById(id);
         if(programma.isPresent()) return programma.get();
-        else throw new ResourceNotFoundException();
+        else throw new RecordNotFoundException();
     }
 
     @GetMapping
@@ -52,11 +50,11 @@ public class ProgrammaFedeltaService {
 
 
     @PostMapping
-    public void registraProgrammaFedelta(@RequestBody programmaFedeltaDTO dto) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+    public void registraProgrammaFedelta(@RequestBody ProgrammaFedeltaDTO dto) throws RecordNotFoundException, RecordAlreadyExistsException{
         Azienda azienda = aziendaService.findAziendaById(dto.getAziendaId());
         for (ProgrammaFedelta p: azienda.getProgrammiFedelta()) {
             if(p.getNome().equals(dto.getNome()))
-                throw new ResourceAlreadyExistsException();
+                throw new RecordAlreadyExistsException();
         }
         ProgrammaFedelta nuovoProgramma = programmaFactory.crea(azienda, dto);
         aziendaService.aggiungiProgrammaAlCatalogo(azienda, nuovoProgramma);
@@ -64,12 +62,12 @@ public class ProgrammaFedeltaService {
     }
 
     @Transactional
-    public void modificaProgramma(Long id, String nome, Integer ratioExpEuro) throws ResourceNotFoundException, ResourceAlreadyExistsException{
+    public void modificaProgramma(Long id, String nome, Integer ratioExpEuro) throws RecordNotFoundException, RecordAlreadyExistsException{
         ProgrammaFedelta programma =this.findProgrammaByID(id);
         //faccio qui le modifiche generali del pf
         if(nome != null && nome.length() > 0){
             for (ProgrammaFedelta p: programma.getAzienda().getProgrammiFedelta()) {
-                if(p.getNome().equals(nome)) throw new ResourceAlreadyExistsException();
+                if(p.getNome().equals(nome)) throw new RecordAlreadyExistsException();
             }
             programma.setNome(nome);
         }
@@ -82,23 +80,24 @@ public class ProgrammaFedeltaService {
     }
 
     @Transactional
-    public void modificaProgrammaLivelli(ProgrammaLivelli programma, Integer ratioExpEuro) throws ResourceNotFoundException{
+    public void modificaProgrammaLivelli(ProgrammaLivelli programma, Integer ratioExpEuro) throws RecordNotFoundException{
         if(ratioExpEuro != null && ratioExpEuro > 0){
-            programma.setRapportoExpEuro(ratioExpEuro);
+            programma.setRatioExpEuro(ratioExpEuro);
         }
     }
 
     @DeleteMapping
-    public void cancellaProgrammaFedelta(Long id) throws ResourceNotFoundException{
+    public void cancellaProgrammaFedelta(Long id) throws RecordNotFoundException{
         ProgrammaFedelta programma = this.findProgrammaByID(id);
         this.programmaRepository.deleteById(id);
     }
 
-    public void rimuoviIscrizione(Sottoscrizione iscrizione) {
+    public void rimuoviIscrizione(Iscrizione iscrizione) {
         iscrizione.getProgramma().getIscrizioni().remove(iscrizione);
         programmaRepository.save(iscrizione.getProgramma());
     }
-     public void aggiungiLivello(ProgrammaLivelli programma, Livello livello) throws ResourceAlreadyExistsException {
+
+    public void aggiungiLivello(ProgrammaLivelli programma, Livello livello) throws RecordAlreadyExistsException {
         List<Livello> livelliProgramma = programma.getLivelli();
         if(!livelliProgramma.isEmpty()) {
             livelliProgramma.get(livelliProgramma.size() - 1).notUltimo();
