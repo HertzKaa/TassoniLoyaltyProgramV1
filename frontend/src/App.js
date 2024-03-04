@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import {Routes, Route, Link, Navigate} from "react-router-dom";
+import {Routes, Route, Link, Navigate} from "react-router-dom"; //moduli sono utilizzati per gestire il routing dell'applicazione
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+// Importati i vari moduli
 import AuthService from "./services/auth.service";
-
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/listaIscrizioni.component";
 
+//controlla se un utente è già autenticato.
 function LoginComponent() {
   if (AuthService.getCurrentUser()) {
     return <Navigate to="/profile" />;
@@ -18,6 +19,7 @@ function LoginComponent() {
   return <Login />;
 }
 
+//controlla se un utente è già registrato.
 function RegisterComponent() {
   if (AuthService.getCurrentUser()) {
     return <Navigate to="/profile" />;
@@ -25,19 +27,25 @@ function RegisterComponent() {
   return <Register />;
 }
 
+
 class App extends Component {
+  // Viene inizializzato lo stato iniziale della componente App.
   constructor(props) {
     super(props);
+    //Il metodo this.logOut viene legato per garantire che l'oggetto this
+    // si riferisca correttamente all'istanza della classe App.
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      currentUser: undefined,
+      currentUser: undefined, // Setta lo stato iniziale dell'utente
     };
   }
 
   componentDidMount() {
+    //Verifica se c'è un utente attualmente autenticato
     const user = AuthService.getCurrentUser();
 
+    //Assegna i flag all'utente
     if (user) {
       this.setState({
         currentUser: user,
@@ -47,6 +55,7 @@ class App extends Component {
     }
   }
 
+  // Disconnette un utente
   logOut() {
     AuthService.logout();
     this.setState({
@@ -56,6 +65,7 @@ class App extends Component {
     });
   }
 
+  //JSX che rappresenta la struttura dell'interfaccia utente.
   render() {
     const { currentUser } = this.state;
 
