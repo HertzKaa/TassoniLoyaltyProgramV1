@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class AccreditoDTO {
 
-    private Long cartaId;
+    private Long tesseraId;
     private Long aziendaId;
     private double sommaAcquisto;
 

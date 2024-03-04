@@ -1,4 +1,4 @@
-package it.unicam.tassoniloyaltyplatform.cliente.services;
+package it.unicam.tassoniloyaltyplatform.cliente.services; //Interfaccia che funziona con spring security
 
 import it.unicam.tassoniloyaltyplatform.eccezioni.RecordNotFoundException;
 import it.unicam.tassoniloyaltyplatform.cliente.Cliente;

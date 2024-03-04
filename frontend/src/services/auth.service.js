@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"; //Services sono le chiamate al backend
 
 const API_URL = '/api';
 

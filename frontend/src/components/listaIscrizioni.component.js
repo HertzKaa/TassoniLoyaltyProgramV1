@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; //componente con errore, ha un bottone che
 import axios from "axios";
 import authHeader from "../services/auth-header";
 import "./listaIscrizioni.css"
