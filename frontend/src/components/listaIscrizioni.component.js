@@ -9,12 +9,13 @@ export default class UserComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            iscrizioniUtente: [], // Cambiato da programmiFedelta a iscrizioniUtente
+            iscrizioniUtente: [], // Array vuoto
             disiscritto: false
         };
     }
 
     componentDidMount() {
+        // Viene effettuata una richiesta GET al backend per ottenere le iscrizioni dell'utente corrente.
         axios.get(`/api/tessera/${authService.getCurrentUser().tesseraId}/iscrizioni`, { headers: authHeader() })
             .then(response => {
                 this.setState({ iscrizioniUtente: response.data });
@@ -71,6 +72,7 @@ export default class UserComponent extends React.Component {
 
     handleDisiscriviti = (iscrizioneId) => {
 
+        // Viene chiamato quando l'utente clicca sul pulsante "Disiscriviti" accanto a una delle sue iscrizioni.
             axios.delete(`/api/iscrizione/${iscrizioneId}`,{ headers: authHeader() })
                 .then(response => {
                     // Aggiorna lo stato solo del programma che è stato iscritto
