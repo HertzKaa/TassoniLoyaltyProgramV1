@@ -15,17 +15,22 @@ export default class ProfileComponent extends Component {
     }
 
     componentDidMount() {
+        // Viene recuperato l'utente corrente utilizzando il servizio di autenticazione 
         const currentUser = AuthService.getCurrentUser();
 
+        // Definito il reindirizzamento
         if (!currentUser) this.setState({ redirect: "/home" });
         this.setState({ currentUser: currentUser, userReady: true })
     }
 
     render() {
         if (this.state.redirect) {
+            // Se l'utente non è autenticato e viene eseguito un reindirizzamento
             return <Navigate to={this.state.redirect} />
         }
 
+    //se l'utente è pronto, vengono visualizzate le informazioni sul profilo utente, inclusi il nome utente,
+    // l'ID utente, l'email e i ruoli assegnati. Se l'utente non è ancora pronto (ad esempio, mentre si attende il caricamento dei dati dell'utente), viene visualizzato null.
         const { currentUser } = this.state;
 
         return (
