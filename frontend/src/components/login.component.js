@@ -33,12 +33,14 @@ class LoginComponent extends Component {
         };
     }
 
+    // Aggiorna lo stato della componente con i valori inseriti dall'utente.
     onChangeUsername(e) {
         this.setState({
             username: e.target.value
         });
     }
 
+    // Aggiorna lo stato della componente con i valori inseriti dall'utente.
     onChangePassword(e) {
         this.setState({
             password: e.target.value
