@@ -11,7 +11,7 @@ const required = value => {
     if (!value) {
         return (
             <div className="alert alert-danger" role="alert">
-                This field is required!
+                Questo campo è obbligatorio.
             </div>
         );
     }
@@ -21,7 +21,7 @@ const email = value => {
     if (!isEmail(value)) {
         return (
             <div className="alert alert-danger" role="alert">
-                This is not a valid email.
+                Questa email non è valida.
             </div>
         );
     }
@@ -31,7 +31,7 @@ const vusername = value => {
     if (value.length < 3 || value.length > 20) {
         return (
             <div className="alert alert-danger" role="alert">
-                The username must be between 3 and 20 characters.
+                Il nome utente deve contenere tra i 3 e i 20 caratteri.
             </div>
         );
     }
@@ -41,7 +41,7 @@ const vpassword = value => {
     if (value.length < 6 || value.length > 40) {
         return (
             <div className="alert alert-danger" role="alert">
-                The password must be between 6 and 40 characters.
+                La password deve contenere tra i 6 e i 40 caratteri.
             </div>
         );
     }
