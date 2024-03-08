@@ -4,16 +4,18 @@ import "./home.css"
 import authService from "../services/auth.service";
 import authHeader from "../services/auth-header";
 
+// homepage di un'applicazione in cui gli utenti possono visualizzare e iscriversi a programmi fedeltà.
 class Home extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            programmiFedelta: [],
-            isIscritto: false
+            programmiFedelta: [], //Array vuoto
+            isIscritto: false // boolean
         };
     }
 
+    // Viene effettuata una richiesta GET al backend per ottenere i programmi fedeltà disponibili
     componentDidMount() {
         axios.get('/api/programmaFedelta')
             .then(response => {
@@ -58,6 +60,7 @@ class Home extends Component {
 
         if (currentUser) {
 
+            //  Viene chiamato quando l'utente clicca sul pulsante "Iscriviti".
             axios.post(`/api/iscrizione/${currentUser.id}/programma/${programmaId}`, null, { headers: authHeader() })
                 .then(response => {
                     // Aggiorna lo stato solo del programma che è stato iscritto
