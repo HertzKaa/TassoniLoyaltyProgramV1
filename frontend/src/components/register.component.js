@@ -55,6 +55,7 @@ export default class RegisterComponent extends Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
 
+        // Viene inizializzato lo stato della componente, includendo lo stato per il nome utente, l'email, la password, lo stato di successo e un eventuale messaggio.
         this.state = {
             username: "",
             email: "",
@@ -64,6 +65,7 @@ export default class RegisterComponent extends Component {
         };
     }
 
+    // Questi metodi aggiornano lo stato della componente con i valori inseriti dall'utente.
     onChangeUsername(e) {
         this.setState({
             username: e.target.value
@@ -90,6 +92,7 @@ export default class RegisterComponent extends Component {
             successful: false
         });
 
+        // Prima di inviare i dati al backend per la registrazione, viene validato il form utilizzando il metodo validateAll()
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
