@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+//gestisce le operazioni relative all'autenticazione e registrazione degli utenti
 //@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -55,19 +55,22 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/login")
+    //gestisce la richiesta di autenticazione
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws RecordNotFoundException {
-
+        //Autenticazione dell'utente
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+        // indica a Spring Security chi è l'utente autenticato e quali sono i suoi diritti di accesso durante il corso della richiesta corrente
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        //Generazione del token JWT
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         DettagliClienteImpl userDetails = (DettagliClienteImpl) authentication.getPrincipal();
+        //estrazione ruoli dell'utente
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
+        //return della risposta alla richiesta di autenticazione, con token JWT
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
