@@ -55,22 +55,22 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/login")
-    //gestisce la richiesta di autenticazione
+    // gestisce la richiesta di autenticazione
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws RecordNotFoundException {
-        //Autenticazione dell'utente
+        // Autenticazione dell'utente
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         // indica a Spring Security chi è l'utente autenticato e quali sono i suoi diritti di accesso durante il corso della richiesta corrente
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        //Generazione del token JWT
+        // Generazione del token JWT
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         DettagliClienteImpl userDetails = (DettagliClienteImpl) authentication.getPrincipal();
-        //estrazione ruoli dell'utente
+        // estrazione ruoli dell'utente
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        //return della risposta alla richiesta di autenticazione, con token JWT
+        // return della risposta alla richiesta di autenticazione, con token JWT
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
@@ -81,12 +81,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws RecordNotFoundException {
+        // Verifica se lo username è già in uso
         if (clienteRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Username già preso!"));
         }
-
+        // Verifica se l'email è già in uso
         if (clienteRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
@@ -99,7 +100,8 @@ public class AuthController {
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-
+        // Vengono gestiti i ruoli dell'utente e se non è specificato nella richiesta gli 
+        //viene assegnato un ruolo di default 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Ruolo non trovato"));
