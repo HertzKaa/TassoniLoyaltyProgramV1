@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+//rappresenta i dettagli di un cliente e gestisce l'autenticazione e l'autorizzazione degli utenti
 public class DettagliClienteImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,7 @@ public class DettagliClienteImpl implements UserDetails {
     }
 
     public static DettagliClienteImpl build(Cliente cliente) {
+        //converte ogni ruolo del cliente in un oggetto SimpleGrantedAuthority
         List<GrantedAuthority> authorities = cliente.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
@@ -48,7 +49,7 @@ public class DettagliClienteImpl implements UserDetails {
                 cliente.getPassword(),
                 authorities);
     }
-
+    //Restituisce la collezione di autorizzazioni del cliente
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
