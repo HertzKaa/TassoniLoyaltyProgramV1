@@ -17,9 +17,10 @@ import java.util.Optional;
 public class DettagliClienteServiceImpl implements UserDetailsService {
     @Autowired
     ClienteRepository clienteRepository;
-
+    
     @Override
     @Transactional
+    //carica i dettagli dell'utente durante il processo di autenticazione
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Cliente cliente = clienteRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
