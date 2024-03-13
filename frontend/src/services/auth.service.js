@@ -7,6 +7,11 @@ const API_URL = '/api';
 
 // Questo metodo rimuove l'oggetto "user" dal localStorage del browser, quindi deautentica l'utente corrente.
 class AuthService {
+    getToken() {
+        const user = localStorage.getItem("user");
+        return JSON.parse(user).accessToken;
+    }
+
     login(username, password) {
         return axios
             .post(API_URL + "/login", {
