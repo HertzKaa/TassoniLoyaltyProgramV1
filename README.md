@@ -1,3 +1,3 @@
 # TassoniLoyaltyProgramV1
 
-Progetto di Ingegneria del Software di Andrea Carlini e Claudio Cozzolino 
+Progetto di Ingegneria del Software di Andrea Pompini e Claudio Cozzolino 
