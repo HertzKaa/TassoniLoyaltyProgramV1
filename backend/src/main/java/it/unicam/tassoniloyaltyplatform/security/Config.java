@@ -28,11 +28,11 @@ public class Config {
     @Bean
     CommandLineRunner aziendapfCommandLineRunner(AziendaService aziendaService, ProgrammaFedeltaService programmaFedeltaService, LivelloService livelloService) {
         return args -> {
-            Azienda LorisCorp = new Azienda("LorisCorp","sbaraglia@gmail.com");
+            Azienda LujaCorp = new Azienda("LujaCorp","dipasquale@gmail.com");
             Azienda TassoniSRL=new Azienda("Tassoni SRL","cedrataspa@gmail.com");
-            Azienda SanPellegreinoSPA=new Azienda("San Pellegrino s.p.a.", "limonataspa@gmail.com");
-            Azienda FarmaciaMilesi=new Azienda("Farmacia Milesi", "milesimail@gmail.com");
-            Azienda PizzeriaDaPasquale=new Azienda("Pizzeria da Pasquale", "pasqualemail@gmail.com");
+            Azienda JoPizzaSPA=new Azienda("JoPizza s.p.a.", "margherita@gmail.com");
+            Azienda Multiplex=new Azienda("Cinema Multiplex", "multi@gmail.com");
+            Azienda Coujasrl=new Azienda("Couja srl", "burnare@gmail.com");
             aziendaService.registraAzienda(LorisCorp);
             aziendaService.registraAzienda(TassoniSRL);
             aziendaService.registraAzienda(SanPellegreinoSPA);
@@ -41,11 +41,11 @@ public class Config {
 
             long id = 1;
 
-            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Loris SuperFedeltà"));
+            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Luja Fedeltà"));
             programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Cedrata Tassoni 4free"));
-            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Aranciata Superiore"));
-            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Farmacia Milesi Loyalty"));
-            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Pasquale Family"));
+            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Pizzata assurda"));
+            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Cinema Multiplex Loyality"));
+            programmaFedeltaService.registraProgrammaFedelta(new ProgrammaFedeltaDTO(TipoProgramma.livelli, id++, "Burnare extra"));
 
             livelloService.aggiungiLivello(new LivelloDTO(new Long(1), "Principiante", 1000));
             livelloService.aggiungiLivello(new LivelloDTO(new Long(1), "Molto figo", 30000));
