@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"LorisCorporation\",\r\n    \"email\" : \"sbaraglia@omega.com\" \r\n}",
+					"raw": "{\r\n    \"nome\" : \"LujaCorp\",\r\n    \"email\" : \"dipasquale@gmail.com\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -180,7 +180,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"tipo\" : \"livelli\",\r\n    \"aziendaId\" : 1,\r\n    \"nome\" : \"VersoLaGrandezza\" \r\n}",
+					"raw": "{\r\n    \"tipo\" : \"livelli\",\r\n    \"aziendaId\" : 1,\r\n    \"nome\" : \"Si vola in alto\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -291,7 +291,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"programmaId\": 1,\r\n\"nome\" : \"OmegaCliente\",\r\n\"expNextLevel\" : 70\r\n\r\n\r\n}",
+					"raw": "{\r\n\"programmaId\": 1,\r\n\"nome\" : \"LujaCliente\",\r\n\"expNextLevel\" : 70\r\n\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -380,7 +380,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"Emanuele\",\r\n    \"email\" : \"ema@ema.com\" \r\n}",
+					"raw": "{\r\n    \"nome\" : \"Simone\",\r\n    \"email\" : \"simo@simo.com\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -440,7 +440,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\" : \"Michele\",\r\n    \"email\" : \"salve@prof.it\"\r\n}",
+					"raw": "{\r\n    \"nome\" : \"Andrea\",\r\n    \"email\" : \"sium@gmail.it\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
