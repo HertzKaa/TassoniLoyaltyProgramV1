@@ -32,12 +32,12 @@ public class Config {
             Azienda TassoniSRL=new Azienda("Tassoni SRL","cedrataspa@gmail.com");
             Azienda JoPizzaSPA=new Azienda("JoPizza s.p.a.", "margherita@gmail.com");
             Azienda Multiplex=new Azienda("Cinema Multiplex", "multi@gmail.com");
-            Azienda Coujasrl=new Azienda("Couja srl", "burnare@gmail.com");
-            aziendaService.registraAzienda(LorisCorp);
+            Azienda CoujaSRL=new Azienda("Couja SRL", "burnare@gmail.com");
+            aziendaService.registraAzienda(LujaCorp);
             aziendaService.registraAzienda(TassoniSRL);
-            aziendaService.registraAzienda(SanPellegreinoSPA);
-            aziendaService.registraAzienda(FarmaciaMilesi);
-            aziendaService.registraAzienda(PizzeriaDaPasquale);
+            aziendaService.registraAzienda(JoPizzaSPA);
+            aziendaService.registraAzienda(Multiplex);
+            aziendaService.registraAzienda(Coujasrl);
 
             long id = 1;
 
