@@ -37,7 +37,7 @@ public class Config {
             aziendaService.registraAzienda(TassoniSRL);
             aziendaService.registraAzienda(JoPizzaSPA);
             aziendaService.registraAzienda(Multiplex);
-            aziendaService.registraAzienda(Coujasrl);
+            aziendaService.registraAzienda(CoujaSRL);
 
             long id = 1;
 
