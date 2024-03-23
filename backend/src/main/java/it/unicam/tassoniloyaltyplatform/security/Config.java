@@ -49,10 +49,10 @@ public class Config {
 
             livelloService.aggiungiLivello(new LivelloDTO(new Long(1), "Principiante", 1000));
             livelloService.aggiungiLivello(new LivelloDTO(new Long(1), "Molto figo", 30000));
-            livelloService.aggiungiLivello(new LivelloDTO(new Long(2), "Help", 30000));
-            livelloService.aggiungiLivello(new LivelloDTO(new Long(3), "Help", 30000));
-            livelloService.aggiungiLivello(new LivelloDTO(new Long(4), "Help", 30000));
-            livelloService.aggiungiLivello(new LivelloDTO(new Long(5), "Help", 30000));
+            livelloService.aggiungiLivello(new LivelloDTO(new Long(2), "Principiante", 30000));
+            livelloService.aggiungiLivello(new LivelloDTO(new Long(3), "Principiante", 30000));
+            livelloService.aggiungiLivello(new LivelloDTO(new Long(4), "Principiante", 30000));
+            livelloService.aggiungiLivello(new LivelloDTO(new Long(5), "Principiante", 30000));
 
         };
     }
